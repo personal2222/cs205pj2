@@ -9,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import lab14.MainView;
 
 /**
  *
@@ -41,13 +40,11 @@ public class WaveView extends javax.swing.JFrame {
         javax.swing.JPanel jPanel2 = new javax.swing.JPanel();
         javax.swing.JLabel labelLeftPanel = new javax.swing.JLabel();
         scrpanLeft = new javax.swing.JScrollPane();
-        leftChannelComp = new hw02.View.WaveFormComponent();
         jScrollBar1 = new javax.swing.JScrollBar();
         javax.swing.JPanel rightPanel = new javax.swing.JPanel();
         javax.swing.JPanel jPanel6 = new javax.swing.JPanel();
         javax.swing.JLabel labelRightPanel = new javax.swing.JLabel();
         scrpanRight = new javax.swing.JScrollPane();
-        rightChannelComp = new hw02.View.WaveFormComponent();
         jScrollBar2 = new javax.swing.JScrollBar();
         genMeunBar = new javax.swing.JMenuBar();
         fileMeun = new javax.swing.JMenu();
@@ -85,8 +82,6 @@ public class WaveView extends javax.swing.JFrame {
         labelLeftPanel.setText("Left Channel");
         jPanel2.add(labelLeftPanel);
 
-        scrpanLeft.setViewportView(leftChannelComp);
-
         jScrollBar1.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
@@ -116,8 +111,6 @@ public class WaveView extends javax.swing.JFrame {
         labelRightPanel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelRightPanel.setText("Right Channel");
         jPanel6.add(labelRightPanel);
-
-        scrpanRight.setViewportView(rightChannelComp);
 
         jScrollBar2.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
 
@@ -223,13 +216,13 @@ public class WaveView extends javax.swing.JFrame {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WaveView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WaveView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WaveView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WaveView.class.getName()).log(Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -246,12 +239,10 @@ public class WaveView extends javax.swing.JFrame {
     private javax.swing.JMenuBar genMeunBar;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollBar jScrollBar2;
-    private hw02.View.WaveFormComponent leftChannelComp;
     private javax.swing.JMenuItem newMeunItem;
     private javax.swing.JMenuItem openMeunItem;
     private javax.swing.JRadioButton rdbtnFreqView;
     private javax.swing.JRadioButton rdbtnTimeView;
-    private hw02.View.WaveFormComponent rightChannelComp;
     private javax.swing.JScrollPane scrpanLeft;
     private javax.swing.JScrollPane scrpanRight;
     // End of variables declaration//GEN-END:variables

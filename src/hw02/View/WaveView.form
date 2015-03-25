@@ -197,14 +197,6 @@
         <Container class="javax.swing.JScrollPane" name="scrpanLeft">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Container class="hw02.View.WaveFormComponent" name="leftChannelComp">
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-                <Property name="useNullLayout" type="boolean" value="true"/>
-              </Layout>
-            </Container>
-          </SubComponents>
         </Container>
         <Component class="javax.swing.JScrollBar" name="jScrollBar1">
           <Properties>
@@ -276,14 +268,6 @@
         <Container class="javax.swing.JScrollPane" name="scrpanRight">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Container class="hw02.View.WaveFormComponent" name="rightChannelComp">
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-                <Property name="useNullLayout" type="boolean" value="true"/>
-              </Layout>
-            </Container>
-          </SubComponents>
         </Container>
         <Component class="javax.swing.JScrollBar" name="jScrollBar2">
           <Properties>
