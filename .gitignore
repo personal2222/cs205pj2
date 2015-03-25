@@ -46,3 +46,4 @@ Temporary Items
 manifest.mf
 nbproject/genfiles.properties
 *.properties
+/build/
