@@ -9,6 +9,8 @@ import hw02.Model.SoundBasic.Sound;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.BoundedRangeModel;
+import javax.swing.DefaultBoundedRangeModel;
 
 /**
  *
@@ -40,6 +42,7 @@ public class WaveModel {
     private WaveChannel channel;
     private double[] fwave;
     private Sound raw;
+    private BoundedRangeModel Range;
 
     public WaveModel() throws UnsupportedAudioFileException {
         this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(0, 0, 3, hw02.Model.SoundBasic.genTone.ToneType.SINE);
@@ -50,6 +53,8 @@ public class WaveModel {
         this.wavetype = WaveType.GENARATED;
         this.waveform = WaveForm.TIME;
         this.channel = WaveChannel.MONO;
+        this.Range = new DefaultBoundedRangeModel((int) endIdx - startIdx, 0, 0,
+                                                  100);
     }
 
     public void generateWaveModel(short[] raw) throws UnsupportedAudioFileException {
@@ -81,6 +86,8 @@ public class WaveModel {
             }
 
         }
+        this.startIdx = 0;
+        this.endIdx = this.rawWave.length;
     }
 
     public short[] getRawWave2() {
