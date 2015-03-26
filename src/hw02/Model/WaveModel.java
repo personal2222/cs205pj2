@@ -24,11 +24,16 @@ public class WaveModel {
     private int startIdx;
     private int endIdx;
 
+    public WaveModel() {
+        this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(400, 0.5, 3, hw02.Model.SoundBasic.genTone.ToneType.SINE);
+        this.startIdx = 0;
+        this.endIdx = 1000;
+    }
+
     public WaveModel(double freq, double amp, double dur) {
         this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(freq, amp, dur, hw02.Model.SoundBasic.genTone.ToneType.SINE);
         this.startIdx = 0;
         this.endIdx = 1000;
-
     }
 
     public WaveModel(File fileinput) throws IOException, UnsupportedAudioFileException {

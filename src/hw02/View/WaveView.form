@@ -157,7 +157,7 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
               <Component id="scrpanLeft" max="32767" attributes="0"/>
-              <Component id="jScrollBar1" alignment="1" max="32767" attributes="0"/>
+              <Component id="keftScrBar" alignment="1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -168,7 +168,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="scrpanLeft" min="-2" pref="112" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jScrollBar1" min="-2" max="-2" attributes="0"/>
+                  <Component id="keftScrBar" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -209,7 +209,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JScrollBar" name="jScrollBar1">
+        <Component class="javax.swing.JScrollBar" name="keftScrBar">
           <Properties>
             <Property name="orientation" type="int" value="0"/>
           </Properties>
@@ -231,7 +231,7 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
               <Component id="scrpanRight" alignment="0" max="32767" attributes="0"/>
-              <Component id="jScrollBar2" alignment="0" min="-2" pref="330" max="-2" attributes="0"/>
+              <Component id="rightScrBar" alignment="0" min="-2" pref="330" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -242,7 +242,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="scrpanRight" pref="97" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollBar2" min="-2" max="-2" attributes="0"/>
+                  <Component id="rightScrBar" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -283,7 +283,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JScrollBar" name="jScrollBar2">
+        <Component class="javax.swing.JScrollBar" name="rightScrBar">
           <Properties>
             <Property name="orientation" type="int" value="0"/>
           </Properties>
