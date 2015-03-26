@@ -13,7 +13,7 @@
  *
  * ****************************************
  */
-package hw01;
+package hw02.Model.SoundBasic;
 
 import java.nio.ShortBuffer;
 import javax.sound.sampled.AudioFormat;

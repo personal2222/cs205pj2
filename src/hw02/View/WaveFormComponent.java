@@ -33,7 +33,7 @@ public class WaveFormComponent extends JComponent {
     private int endIdx;
 
     public WaveFormComponent() {
-        this.rawWave = hw01.genTone.generatePureTone(400, 0.5, 3, hw01.genTone.ToneType.SINE);
+        this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(400, 0.5, 3, hw02.Model.SoundBasic.genTone.ToneType.SINE);
         this.startIdx = 0;
         this.endIdx = 1000;
     }

@@ -13,7 +13,7 @@
  *
  * ****************************************
  */
-package hw01;
+package hw02.Model.SoundBasic;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -301,7 +301,7 @@ public class Sound {
      * @return A new Sound representing the original sound after the volume
      * adjustment.
      * @throws UnsupportedAudioFileException
-     * @throws hw01.VolumeOutOfRangeException
+     * @throws hw02.Model.SoundBasic.VolumeOutOfRangeException
      */
     public Sound SetVolumn(double set) throws UnsupportedAudioFileException, VolumeOutOfRangeException {
         double ratio = 1 + set;

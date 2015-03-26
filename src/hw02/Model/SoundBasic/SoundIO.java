@@ -13,7 +13,7 @@
  *
  * ****************************************
  */
-package hw01;
+package hw02.Model.SoundBasic;
 
 import java.io.File;
 import java.io.IOException;
