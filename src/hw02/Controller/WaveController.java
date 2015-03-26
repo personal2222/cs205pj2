@@ -5,10 +5,16 @@
  */
 package hw02.Controller;
 
+import hw02.Model.WaveModel;
+import hw02.View.WaveView;
+
 /**
  *
  * @author huangjiayu
  */
 public class WaveController {
+
+    private WaveModel theModel;
+    private WaveView theView;
 
 }
