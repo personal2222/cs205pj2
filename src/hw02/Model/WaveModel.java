@@ -83,7 +83,8 @@ public class WaveModel {
             for (short i : this.rawWave) {
                 short j = (short) (i & 0xff);
                 i = (short) (i >> 8);
-                this.rawWave2[temp] = j;
+                this.rawWave[temp] = (short) (i * Math.pow(2, 8));
+                this.rawWave2[temp] = (short) (j * Math.pow(2, 8));
                 temp++;
             }
 

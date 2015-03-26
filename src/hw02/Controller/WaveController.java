@@ -43,7 +43,7 @@ public class WaveController implements ActionListener, AdjustmentListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == theView.getNewMeunItem()) {
             try {
-                theModel.generateWaveModel(PopUpUtility.genWave());
+                this.theModel.generateWaveModel(PopUpUtility.genWave());
             } catch (UnsupportedAudioFileException ex) {
                 Logger.getLogger(WaveController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -52,7 +52,9 @@ public class WaveController implements ActionListener, AdjustmentListener {
             while (true) {
 
                 try {
-                    theModel.readFileWaveModel(PopUpUtility.getFile());
+                    this.theModel.readFileWaveModel(PopUpUtility.getFile());
+                    //this.theView.getWaveFormComponent1().setEndIdx(this.theModel.getEndIdx());
+                    //this.theView.getWaveFormComponent2().setEndIdx(this.theModel.getEndIdx());
                     break;
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(null, "File Error", "Bad File", JOptionPane.ERROR_MESSAGE);
@@ -64,7 +66,7 @@ public class WaveController implements ActionListener, AdjustmentListener {
 
                 }
 
-            }
+            }//TODO:BUG WITH STEREO
             updatewave();
 
         }
