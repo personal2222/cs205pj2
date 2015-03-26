@@ -8,6 +8,7 @@ package hw02.Controller;
 import hw02.Model.SoundBasic.genTone;
 import hw02.Model.SoundBasic.genTone.ToneType;
 import hw02.View.PopUps;
+import java.io.File;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,7 +27,6 @@ public class PopUpUtility {
         } else {
             return genTone.generatePureTone(freq, amplitude, duration, toneType);
         }
-
     }
 
     public static ToneType getToneType() {
@@ -117,5 +117,9 @@ public class PopUpUtility {
                 continue;
             }
         }
+    }
+
+    public static File getFile() {
+        return PopUps.chooseFile();
     }
 }

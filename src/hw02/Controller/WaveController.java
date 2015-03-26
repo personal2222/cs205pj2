@@ -45,6 +45,8 @@ public class WaveController implements ActionListener, AdjustmentListener {
                 Logger.getLogger(WaveController.class.getName()).log(Level.SEVERE, null, ex);
             }
             updatewave();
+        } else if (e.getSource() == theView.getOpenMeunItem()) {
+
         }
     }
 
