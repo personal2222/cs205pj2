@@ -40,6 +40,10 @@ public class WaveFormComponent extends JComponent {
         this.amplifier = 1;
     }
 
+    public void setRawWave(short[] rawWave) {
+        this.rawWave = rawWave;
+    }
+
     public WaveFormComponent(short[] rawWave, int startIdx, int endIdx) {
         this.rawWave = rawWave;
         this.startIdx = startIdx;

@@ -26,11 +26,18 @@ public class WaveModel {
         TIME, FREC;
     }
 
+    public static enum WaveChannel {
+
+        MONO, DOUBLE;
+    }
+
     private short[] rawWave;
+    private short[] rawWave2;
     private int startIdx;
     private int endIdx;
     private WaveType wavetype;
     private WaveForm waveform;
+    private WaveChannel channel;
     private double[] fwave;
     private Sound raw;
 
@@ -41,6 +48,7 @@ public class WaveModel {
         this.endIdx = 1000;
         this.wavetype = WaveType.GENARATED;
         this.waveform = WaveForm.TIME;
+        this.channel = WaveChannel.MONO;
     }
 
     public WaveModel(double freq, double amp, double dur) throws UnsupportedAudioFileException {
@@ -50,8 +58,10 @@ public class WaveModel {
         this.endIdx = 1000;
         this.wavetype = WaveType.GENARATED;
         this.waveform = WaveForm.TIME;
+        this.channel = WaveChannel.MONO;
     }
 
+    //TODO TEST
     public WaveModel(File fileinput) throws IOException, UnsupportedAudioFileException {
         this.rawWave = hw02.Model.SoundBasic.SoundIO.read(fileinput.getPath()).getShortRepresentation();
         this.raw = hw02.Model.SoundBasic.SoundIO.read(fileinput.getPath());
@@ -59,6 +69,35 @@ public class WaveModel {
         this.endIdx = 1000;
         this.waveform = WaveForm.TIME;
         this.wavetype = WaveType.READFILE;
+        if (this.raw.getAf().getChannels() == 1) {
+            this.channel = WaveChannel.MONO;
+        } else {
+            this.channel = WaveChannel.DOUBLE;
+            int temp = 0;
+            for (short i : this.rawWave) {
+                short j = (short) (i * 0xff);
+                i = (short) (i >> 8);
+                this.rawWave2[temp] = j;
+                temp++;
+            }
+
+        }
+    }
+
+    public short[] getRawWave2() {
+        return rawWave2;
+    }
+
+    public WaveChannel getChannel() {
+        return channel;
+    }
+
+    public double[] getFwave() {
+        return fwave;
+    }
+
+    public Sound getRaw() {
+        return raw;
     }
 
     public short[] getRawWave() {

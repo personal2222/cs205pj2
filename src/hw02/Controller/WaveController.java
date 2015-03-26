@@ -6,6 +6,7 @@
 package hw02.Controller;
 
 import hw02.Model.WaveModel;
+import hw02.Model.WaveModel.WaveChannel;
 import hw02.View.WaveView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +25,15 @@ public class WaveController implements ActionListener, AdjustmentListener {
     public WaveController(WaveModel theModel, WaveView theView) {
         this.theModel = theModel;
         this.theView = theView;
+    }
+
+    public void updatewave() {
+        if (this.theModel.getChannel() == WaveChannel.MONO) {
+            this.theView.getWaveFormComponent1().setRawWave(this.theModel.getRawWave());
+        } else {
+            this.theView.getWaveFormComponent1().setRawWave(this.theModel.getRawWave());
+            this.theView.getWaveFormComponent2().setRawWave(this.theModel.getRawWave2());
+        }
     }
 
     @Override
