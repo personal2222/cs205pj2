@@ -5,6 +5,7 @@
  */
 package hw02;
 
+import hw02.Controller.WaveController;
 import hw02.Model.WaveModel;
 import hw02.View.WaveView;
 import java.util.logging.Level;
@@ -47,6 +48,7 @@ public class WaveMain {
                 WaveView theView = new WaveView();
                 try {
                     WaveModel theModel = new WaveModel();
+                    WaveController theController = new WaveController(theModel, theView);
                 } catch (UnsupportedAudioFileException ex) {
                     Logger.getLogger(WaveMain.class.getName()).log(Level.SEVERE, null, ex);
                 }

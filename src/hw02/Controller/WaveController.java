@@ -25,6 +25,7 @@ public class WaveController implements ActionListener, AdjustmentListener {
     public WaveController(WaveModel theModel, WaveView theView) {
         this.theModel = theModel;
         this.theView = theView;
+        theView.getNewMeunItem().addActionListener(this);
     }
 
     public void updatewave() {
@@ -39,7 +40,7 @@ public class WaveController implements ActionListener, AdjustmentListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == theView.getNewMeunItem()) {
-
+            theView.getWaveFormComponent1().setRawWave(PopUpUtility.genWave());
         }
     }
 

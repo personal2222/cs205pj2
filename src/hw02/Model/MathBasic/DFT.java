@@ -15,8 +15,6 @@
  */
 package hw02.Model.MathBasic;
 
-import hw02.Model.SoundBasic.Sound;
-
 /**
  * @author Jiayu Huang, Zhengri Fan
  */
@@ -33,8 +31,7 @@ public class DFT {
      * Note: It won't actually throw the LengthNotAPowerOfTwoException since it
      * will add 0s to the array so that it actually have length of power of 2
      */
-    public static Complex[] SoundDFT(Sound sound) throws LengthNotAPowerOfTwoException {
-        short[] rawSound = sound.getShortRepresentation();
+    public static Complex[] shortDFT(short[] rawSound) throws LengthNotAPowerOfTwoException {
         Complex[] waveRepr = new Complex[rawSound.length];
         System.out.println("Reading Wave");
         for (int i = 0; i < waveRepr.length; ++i) {
@@ -162,30 +159,18 @@ public class DFT {
         return new Complex(0, imag);
     }
 
-    /**
-     * Return the maximum n peaks indicated by numPeaksInterested as a double
-     * array
-     *
-     * @see
-     * <a href="http://www.dosits.org/science/soundmeasurement/soundshear/">
-     * http://www.dosits.org/science/soundmeasurement/soundshear/</a>
-     * @param sound the sound object for performing a DFT
-     * @param numPeaksInterested top n peaks interested.
-     * @return a double array of top n frequencies
-     * @throws LengthNotAPowerOfTwoException
-     */
-    public static double[] DFTResult(Sound sound, int numPeaksInterested) throws LengthNotAPowerOfTwoException {
-        int maxHumanFreq = 20000;
-        int minHumanFreq = 20;
-        Complex[] afterTransform = SoundDFT(sound);
-        int startingIndex = (int) (minHumanFreq * afterTransform.length / sound.getAf().getSampleRate());
-        int endingIndex = (int) (maxHumanFreq * afterTransform.length / sound.getAf().getSampleRate());
-        int[] maxIndexArray = findMaxNIndex(startingIndex, endingIndex, numPeaksInterested, afterTransform);
-        double[] maxFreqArray = new double[maxIndexArray.length];
-        for (int i = 0; i < maxIndexArray.length; ++i) {
-            maxFreqArray[i] = maxIndexArray[i] * sound.getAf().getSampleRate() / afterTransform.length;
+    public static double[] getMagnitudeResult(short[] rawWave) {
+        Complex[] result = null;
+        try {
+            result = DFT.shortDFT(rawWave);
+        } catch (LengthNotAPowerOfTwoException lnpte) {
+            lnpte.printStackTrace();
         }
-        return maxFreqArray;
+        double[] magArray = new double[result.length];
+        for (int i = 0; i < result.length; ++i) {
+            magArray[i] = result[i].magnitude();
+        }
+        return magArray;
     }
 
     /**
