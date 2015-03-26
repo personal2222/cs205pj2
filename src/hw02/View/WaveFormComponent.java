@@ -28,16 +28,23 @@ import javax.swing.JComponent;
  */
 public class WaveFormComponent extends JComponent {
 
+    enum WaveType {
+
+        DOUBLE, BYTE, SHORT;
+    }
+
     private short[] rawWave;
     private int startIdx;
     private int endIdx;
     private double amplifier;
+    private WaveType waveType;
 
     public WaveFormComponent() {
         this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(400, 0.5, 3, hw02.Model.SoundBasic.genTone.ToneType.SINE);
         this.startIdx = 0;
         this.endIdx = 1000;
         this.amplifier = 1;
+        this.waveType = WaveType.SHORT;
     }
 
     public void setRawWave(short[] rawWave) {
@@ -87,6 +94,16 @@ public class WaveFormComponent extends JComponent {
 
     @Override
     protected void paintComponent(Graphics g) {
+        if (this.waveType == WaveType.SHORT) {
+            this.paintShort(g);
+        } else if (this.waveType == WaveType.SHORT) {
+            this.paintByte(g);
+        } else if (this.waveType == WaveType.DOUBLE) {
+            this.paintDouble(g);
+        }
+    }
+
+    private void paintShort(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         Point prevPoint = new Point(0, this.getHeight() / 2);
         Point curPoint;
@@ -97,6 +114,44 @@ public class WaveFormComponent extends JComponent {
         g2d.setColor(Color.BLUE);
         for (int i = this.startIdx; i < this.endIdx; ++i) {
             int yValue = (int) (((((double) this.getHeight() / 2) / Short.MAX_VALUE) * this.rawWave[i]) * this.amplifier);
+            int xValue = (int) (((this.getWidth() / (double) (this.endIdx - this.startIdx)) * i) * this.amplifier);
+            curPoint = new Point(xValue, yValue + this.getHeight() / 2);
+            lineToRender = new Line2D.Double(prevPoint, curPoint);
+            g2d.draw(lineToRender);
+            prevPoint = curPoint;
+        }
+    }
+
+    private void paintByte(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        Point prevPoint = new Point(0, this.getHeight() / 2);
+        Point curPoint;
+        Line2D.Double lineToRender;
+        g2d.setColor(Color.BLACK);
+        lineToRender = new Line2D.Double(0, this.getHeight() / 2, this.getWidth(), this.getHeight() / 2);
+        g2d.draw(lineToRender);
+        g2d.setColor(Color.BLUE);
+        for (int i = this.startIdx; i < this.endIdx; ++i) {
+            int yValue = (int) (((((double) this.getHeight() / 2) / Byte.MAX_VALUE) * this.rawWave[i]) * this.amplifier);
+            int xValue = (int) (((this.getWidth() / (double) (this.endIdx - this.startIdx)) * i) * this.amplifier);
+            curPoint = new Point(xValue, yValue + this.getHeight() / 2);
+            lineToRender = new Line2D.Double(prevPoint, curPoint);
+            g2d.draw(lineToRender);
+            prevPoint = curPoint;
+        }
+    }
+
+    private void paintDouble(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        Point prevPoint = new Point(0, this.getHeight() / 2);
+        Point curPoint;
+        Line2D.Double lineToRender;
+        g2d.setColor(Color.BLACK);
+        lineToRender = new Line2D.Double(0, this.getHeight() / 2, this.getWidth(), this.getHeight() / 2);
+        g2d.draw(lineToRender);
+        g2d.setColor(Color.BLUE);
+        for (int i = this.startIdx; i < this.endIdx; ++i) {
+            int yValue = (int) (((((double) this.getHeight() / 2) / Double.MAX_VALUE) * this.rawWave[i]) * this.amplifier);
             int xValue = (int) (((this.getWidth() / (double) (this.endIdx - this.startIdx)) * i) * this.amplifier);
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
