@@ -15,7 +15,6 @@
  */
 package hw02.Model.MathBasic;
 
-import hw01.Math.*;
 import hw02.Model.SoundBasic.Sound;
 
 /**

@@ -9,6 +9,7 @@ import hw02.Model.WaveModel;
 import hw02.View.WaveView;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -44,7 +45,11 @@ public class WaveMain {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 WaveView theView = new WaveView();
-                WaveModel theModel = new WaveModel();
+                try {
+                    WaveModel theModel = new WaveModel();
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(WaveMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
                 theView.setVisible(true);
 

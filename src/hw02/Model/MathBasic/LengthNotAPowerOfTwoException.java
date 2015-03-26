@@ -15,8 +15,6 @@
  */
 package hw02.Model.MathBasic;
 
-import hw01.Math.*;
-
 /**
  * Throwed when the length of the array used for DFT is not a power of 2
  *

@@ -15,8 +15,6 @@
  */
 package hw02.Model.MathBasic;
 
-import hw01.Math.*;
-
 /**
  *
  * @author Jiayu Huang, Zhengri Fan
