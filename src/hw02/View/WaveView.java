@@ -7,6 +7,12 @@ package hw02.View;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -237,6 +243,59 @@ public class WaveView extends javax.swing.JFrame {
             }
         });
     }
+
+    public JMenuItem getExitMeunItem() {
+        return exitMeunItem;
+    }
+
+    public JMenu getFileMeun() {
+        return fileMeun;
+    }
+
+    public JMenuBar getGenMeunBar() {
+        return genMeunBar;
+    }
+
+    public JScrollBar getKeftScrBar() {
+        return keftScrBar;
+    }
+
+    public JMenuItem getNewMeunItem() {
+        return newMeunItem;
+    }
+
+    public JMenuItem getOpenMeunItem() {
+        return openMeunItem;
+    }
+
+    public JRadioButton getRdbtnFreqView() {
+        return rdbtnFreqView;
+    }
+
+    public JRadioButton getRdbtnTimeView() {
+        return rdbtnTimeView;
+    }
+
+    public JScrollBar getRightScrBar() {
+        return rightScrBar;
+    }
+
+    public JScrollPane getScrpanLeft() {
+        return scrpanLeft;
+    }
+
+    public JScrollPane getScrpanRight() {
+        return scrpanRight;
+    }
+
+    public WaveFormComponent getWaveFormComponent1() {
+        return waveFormComponent1;
+    }
+
+    public WaveFormComponent getWaveFormComponent2() {
+        return waveFormComponent2;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem exitMeunItem;
     private javax.swing.JMenu fileMeun;
