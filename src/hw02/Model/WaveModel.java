@@ -42,7 +42,8 @@ public class WaveModel {
     private Sound raw;
 
     public WaveModel() throws UnsupportedAudioFileException {
-        this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(400, 0.5, 3, hw02.Model.SoundBasic.genTone.ToneType.SINE);
+        this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(0, 0, 3, hw02.Model.SoundBasic.genTone.ToneType.SINE);
+        this.rawWave2 = this.rawWave;
         this.raw = hw02.Model.SoundBasic.genTone.translateToSound(this.rawWave);
         this.startIdx = 0;
         this.endIdx = 1000;
@@ -51,26 +52,24 @@ public class WaveModel {
         this.channel = WaveChannel.MONO;
     }
 
-    public WaveModel(double freq, double amp, double dur) throws UnsupportedAudioFileException {
-        this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(freq, amp, dur, hw02.Model.SoundBasic.genTone.ToneType.SINE);
+    public void generateWaveModel(short[] raw) throws UnsupportedAudioFileException {
+        this.rawWave = raw;
+        this.rawWave2 = raw;
         this.raw = hw02.Model.SoundBasic.genTone.translateToSound(this.rawWave);
-        this.startIdx = 0;
-        this.endIdx = 1000;
         this.wavetype = WaveType.GENARATED;
         this.waveform = WaveForm.TIME;
         this.channel = WaveChannel.MONO;
     }
 
     //TODO TEST
-    public WaveModel(File fileinput) throws IOException, UnsupportedAudioFileException {
+    public void readFileWaveModel(File fileinput) throws IOException, UnsupportedAudioFileException {
         this.rawWave = hw02.Model.SoundBasic.SoundIO.read(fileinput.getPath()).getShortRepresentation();
         this.raw = hw02.Model.SoundBasic.SoundIO.read(fileinput.getPath());
-        this.startIdx = 0;
-        this.endIdx = 1000;
         this.waveform = WaveForm.TIME;
         this.wavetype = WaveType.READFILE;
         if (this.raw.getAf().getChannels() == 1) {
             this.channel = WaveChannel.MONO;
+            this.rawWave2 = this.rawWave;
         } else {
             this.channel = WaveChannel.DOUBLE;
             int temp = 0;

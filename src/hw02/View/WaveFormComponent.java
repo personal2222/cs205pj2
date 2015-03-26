@@ -42,6 +42,7 @@ public class WaveFormComponent extends JComponent {
 
     public void setRawWave(short[] rawWave) {
         this.rawWave = rawWave;
+        this.repaint();
     }
 
     public WaveFormComponent(short[] rawWave, int startIdx, int endIdx) {

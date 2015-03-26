@@ -6,12 +6,14 @@
 package hw02.Controller;
 
 import hw02.Model.WaveModel;
-import hw02.Model.WaveModel.WaveChannel;
 import hw02.View.WaveView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -26,21 +28,23 @@ public class WaveController implements ActionListener, AdjustmentListener {
         this.theModel = theModel;
         this.theView = theView;
         theView.getNewMeunItem().addActionListener(this);
+        updatewave();
     }
 
     public void updatewave() {
-        if (this.theModel.getChannel() == WaveChannel.MONO) {
-            this.theView.getWaveFormComponent1().setRawWave(this.theModel.getRawWave());
-        } else {
-            this.theView.getWaveFormComponent1().setRawWave(this.theModel.getRawWave());
-            this.theView.getWaveFormComponent2().setRawWave(this.theModel.getRawWave2());
-        }
+        this.theView.getWaveFormComponent1().setRawWave(this.theModel.getRawWave());
+        this.theView.getWaveFormComponent2().setRawWave(this.theModel.getRawWave2());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == theView.getNewMeunItem()) {
-            theView.getWaveFormComponent1().setRawWave(PopUpUtility.genWave());
+            try {
+                theModel.generateWaveModel(PopUpUtility.genWave());
+            } catch (UnsupportedAudioFileException ex) {
+                Logger.getLogger(WaveController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            updatewave();
         }
     }
 
