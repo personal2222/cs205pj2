@@ -11,9 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,6 +30,7 @@ public class WaveController implements ActionListener, AdjustmentListener {
         this.theModel = theModel;
         this.theView = theView;
         theView.getNewMeunItem().addActionListener(this);
+        theView.getOpenMeunItem().addActionListener(this);
         updatewave();
     }
 
@@ -46,6 +49,23 @@ public class WaveController implements ActionListener, AdjustmentListener {
             }
             updatewave();
         } else if (e.getSource() == theView.getOpenMeunItem()) {
+            while (true) {
+
+                try {
+                    theModel.readFileWaveModel(PopUpUtility.getFile());
+                    break;
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "File Error", "Bad File", JOptionPane.ERROR_MESSAGE);
+                    continue;
+
+                } catch (UnsupportedAudioFileException ex) {
+                    JOptionPane.showMessageDialog(null, "UnSupported Audio", "Bad File", JOptionPane.ERROR_MESSAGE);
+                    continue;
+
+                }
+
+            }
+            updatewave();
 
         }
     }

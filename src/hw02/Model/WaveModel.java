@@ -53,8 +53,8 @@ public class WaveModel {
         this.wavetype = WaveType.GENARATED;
         this.waveform = WaveForm.TIME;
         this.channel = WaveChannel.MONO;
-        this.Range = new DefaultBoundedRangeModel((int) endIdx - startIdx, 0, 0,
-                                                  100);
+        this.Range = new DefaultBoundedRangeModel((int) endIdx - startIdx, 0, startIdx,
+                                                  endIdx);
     }
 
     public void generateWaveModel(short[] raw) throws UnsupportedAudioFileException {
@@ -75,11 +75,13 @@ public class WaveModel {
         if (this.raw.getAf().getChannels() == 1) {
             this.channel = WaveChannel.MONO;
             this.rawWave2 = this.rawWave;
+
         } else {
+            this.rawWave2 = this.rawWave;
             this.channel = WaveChannel.DOUBLE;
             int temp = 0;
             for (short i : this.rawWave) {
-                short j = (short) (i * 0xff);
+                short j = (short) (i & 0xff);
                 i = (short) (i >> 8);
                 this.rawWave2[temp] = j;
                 temp++;
