@@ -65,12 +65,16 @@ public class WaveFormComponent extends JComponent implements Scrollable {
     private int startIdx;
     private int endIdx;
     private WaveType waveType;
+    private byte[] rawByteWave;
+    private double[] rawDoubleWave;
 
     public WaveFormComponent() {
         this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(400, 0.5, 3, hw02.Model.SoundBasic.genTone.ToneType.SINE);
         this.startIdx = 0;
         this.endIdx = 1000;
         this.waveType = WaveType.SHORT;
+        this.rawByteWave = null;
+        this.rawDoubleWave = null;
     }
 
     public void setRawWave(short[] rawWave) {
@@ -91,6 +95,30 @@ public class WaveFormComponent extends JComponent implements Scrollable {
 
     public void setEndIdx(int endIdx) {
         this.endIdx = endIdx;
+    }
+
+    public WaveType getWaveType() {
+        return waveType;
+    }
+
+    public void setWaveType(WaveType waveType) {
+        this.waveType = waveType;
+    }
+
+    public byte[] getRawByteWave() {
+        return rawByteWave;
+    }
+
+    public void setRawByteWave(byte[] rawByteWave) {
+        this.rawByteWave = rawByteWave;
+    }
+
+    public double[] getRawDoubleWave() {
+        return rawDoubleWave;
+    }
+
+    public void setRawDoubleWave(double[] rawDoubleWave) {
+        this.rawDoubleWave = rawDoubleWave;
     }
 
     //Getters
@@ -146,7 +174,7 @@ public class WaveFormComponent extends JComponent implements Scrollable {
         g2d.draw(lineToRender);
         g2d.setColor(Color.BLUE);
         for (int i = this.startIdx; i < this.endIdx; ++i) {
-            int yValue = (int) (((((double) this.getHeight() / 2) / Byte.MAX_VALUE) * this.rawWave[i]));
+            int yValue = (int) (((((double) this.getHeight() / 2) / Byte.MAX_VALUE) * this.rawByteWave[i]));
             int xValue = i;
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
@@ -165,7 +193,7 @@ public class WaveFormComponent extends JComponent implements Scrollable {
         g2d.draw(lineToRender);
         g2d.setColor(Color.BLUE);
         for (int i = this.startIdx; i < this.endIdx; ++i) {
-            int yValue = (int) (((((double) this.getHeight() / 2) / Double.MAX_VALUE) * this.rawWave[i]));
+            int yValue = (int) (((((double) this.getHeight() / 2) / Double.MAX_VALUE) * this.rawDoubleWave[i]));
             int xValue = i;
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
