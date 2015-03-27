@@ -6,6 +6,7 @@
 package hw02.Controller;
 
 import hw02.Model.WaveModel;
+import hw02.Model.WaveModel.WaveForm;
 import hw02.View.PopUps;
 import hw02.View.WaveView;
 import java.awt.event.ActionEvent;
@@ -33,12 +34,17 @@ public class WaveController implements ActionListener, AdjustmentListener {
         theView.getNewMeunItem().addActionListener(this);
         theView.getOpenMeunItem().addActionListener(this);
         theView.getExitMeunItem().addActionListener(this);
+        theView.getRdbtnFreqView().addActionListener(this);
         updatewave();
     }
 
     public void updatewave() {
-        this.theView.getWaveFormComponent1().setRawWave(this.theModel.getRawWave());
-        this.theView.getWaveFormComponent2().setRawWave(this.theModel.getRawWave2());
+        if (this.theModel.getWaveform() == WaveForm.FREC) {
+            // this.theView.getWaveFormComponent1().setRawWave(this.theModel.getFwave());
+        } else {
+            this.theView.getWaveFormComponent1().setRawWave(this.theModel.getRawWave());
+            this.theView.getWaveFormComponent2().setRawWave(this.theModel.getRawWave2());
+        }
     }
 
     @Override
@@ -65,7 +71,10 @@ public class WaveController implements ActionListener, AdjustmentListener {
                     JOptionPane.showMessageDialog(null, "UnSupported Audio", "Bad File", JOptionPane.ERROR_MESSAGE);
                     continue;
                 }
-            }//TODO:BUG WITH STEREO
+            }
+            this.theModel.setEndIdx(theModel.getRawWave().length);
+            this.theView.getWaveFormComponent1().setEndIdx(this.theModel.getEndIdx());
+            this.theView.getWaveFormComponent2().setEndIdx(this.theModel.getEndIdx());
             updatewave();
         } else if (e.getSource() == theView.getExitMeunItem()) {
             boolean isExit = PopUps.exitComfirm();
@@ -73,6 +82,10 @@ public class WaveController implements ActionListener, AdjustmentListener {
                 theView.dispose();
                 System.exit(0);
             }
+        } else if (e.getSource() == theView.getRdbtnFreqView()) {
+            theModel.FT();
+            theModel.setWaveform(WaveForm.FREC);
+            updatewave();
         }
     }
 

@@ -43,6 +43,7 @@ public class WaveModel {
     private double[] fwave;
     private Sound raw;
     private BoundedRangeModel Range;
+    private short[] shortf;
 
     public WaveModel() throws UnsupportedAudioFileException {
         this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(0, 0, 3, hw02.Model.SoundBasic.genTone.ToneType.SINE);
@@ -145,4 +146,35 @@ public class WaveModel {
         this.fwave = hw02.Model.MathBasic.DFT.getMagnitudeResult(this.rawWave);
     }
 
+    public void setRawWave2(short[] rawWave2) {
+        this.rawWave2 = rawWave2;
+    }
+
+    public void setWavetype(WaveType wavetype) {
+        this.wavetype = wavetype;
+    }
+
+    public void setWaveform(WaveForm waveform) {
+        this.waveform = waveform;
+    }
+
+    public void setChannel(WaveChannel channel) {
+        this.channel = channel;
+    }
+
+    public void setFwave(double[] fwave) {
+        this.fwave = fwave;
+    }
+
+    public void setRaw(Sound raw) {
+        this.raw = raw;
+    }
+
+    public void setRange(BoundedRangeModel Range) {
+        this.Range = Range;
+    }
+
+    public void setShortf(short[] shortf) {
+        this.shortf = shortf;
+    }
 }
