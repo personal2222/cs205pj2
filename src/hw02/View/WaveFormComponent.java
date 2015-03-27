@@ -165,8 +165,9 @@ public class WaveFormComponent extends JComponent {
         lineToRender = new Line2D.Double(0, this.getHeight() / 2, this.getWidth(), this.getHeight() / 2);
         g2d.draw(lineToRender);
         g2d.setColor(Color.BLUE);
+        double max = this.maxAbsDouble();
         for (int i = this.startIdx; i < this.endIdx; ++i) {
-            int yValue = (int) (((((double) this.getHeight() / 2) / Double.MAX_VALUE) * this.rawDoubleWave[i]));
+            int yValue = (int) (((((double) this.getHeight() / 2) / max) * this.rawDoubleWave[i]));
             int xValue = i * this.amplifier;
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
@@ -191,6 +192,17 @@ public class WaveFormComponent extends JComponent {
         } else {
             return;
         }
+    }
+
+    private double maxAbsDouble() {
+        double max = Double.MIN_VALUE;
+        for (double x : this.rawDoubleWave) {
+            double absX = Math.abs(x);
+            if (absX > max) {
+                max = absX;
+            }
+        }
+        return max;
     }
 
 }
