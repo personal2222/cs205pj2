@@ -176,11 +176,13 @@ public class WaveFormComponent extends JComponent {
 
     public void zoomIn() {
         this.amplifier *= 2;
+        this.repaint();
     }
 
     public void zoomOut() {
         if (this.isShrinkable()) {
             this.amplifier /= 2;
+            this.repaint();
         } else {
             return;
         }
