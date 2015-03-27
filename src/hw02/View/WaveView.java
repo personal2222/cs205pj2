@@ -51,8 +51,8 @@ public class WaveView extends javax.swing.JFrame {
         javax.swing.JLabel labelRightPanel = new javax.swing.JLabel();
         scrpanRight = new javax.swing.JScrollPane();
         waveFormComponent2 = new hw02.View.WaveFormComponent();
-        minusBTN = new javax.swing.JButton();
-        plusBTN = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         genMeunBar = new javax.swing.JMenuBar();
         fileMeun = new javax.swing.JMenu();
         newMeunItem = new javax.swing.JMenuItem();
@@ -86,7 +86,9 @@ public class WaveView extends javax.swing.JFrame {
         buttonPanel.add(rdbtnFreqView);
 
         leftPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        leftPanel.setAutoscrolls(true);
         leftPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        leftPanel.setPreferredSize(new java.awt.Dimension(535, 151));
 
         labelLeftPanel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelLeftPanel.setText("Left Channel");
@@ -103,7 +105,6 @@ public class WaveView extends javax.swing.JFrame {
         );
 
         scrpanLeft.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrpanLeft.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         scrpanLeft.setViewportView(waveFormComponent1);
 
         waveFormComponent1.setPreferredSize(new java.awt.Dimension(waveFormComponent1.getEndIdx(), 100));
@@ -128,13 +129,12 @@ public class WaveView extends javax.swing.JFrame {
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(scrpanLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         rightPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        rightPanel.setPreferredSize(new java.awt.Dimension(535, 165));
 
         labelRightPanel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelRightPanel.setText("Right Channel");
@@ -151,7 +151,8 @@ public class WaveView extends javax.swing.JFrame {
         );
 
         scrpanRight.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrpanRight.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scrpanRight.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrpanRight.setPreferredSize(new java.awt.Dimension(4, 19));
 
         waveFormComponent2.setPreferredSize(new java.awt.Dimension(waveFormComponent2.getEndIdx(), 100));
         scrpanRight.setViewportView(waveFormComponent2);
@@ -167,7 +168,7 @@ public class WaveView extends javax.swing.JFrame {
                         .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(19, 19, 19))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
-                        .addComponent(scrpanRight)
+                        .addComponent(scrpanRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         rightPanelLayout.setVerticalGroup(
@@ -176,21 +177,21 @@ public class WaveView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrpanRight, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                .addComponent(scrpanRight, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        minusBTN.setText("－");
-        minusBTN.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("－");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                minusBTNActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        plusBTN.setText("＋");
-        plusBTN.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("＋");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                plusBTNActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -224,10 +225,13 @@ public class WaveView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(minusBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(plusBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -245,11 +249,11 @@ public class WaveView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(79, 79, 79)
                         .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(minusBTN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(plusBTN)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -267,13 +271,13 @@ public class WaveView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdbtnFreqViewActionPerformed
 
-    private void minusBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minusBTNActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_minusBTNActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void plusBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusBTNActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_plusBTNActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,10 +357,10 @@ public class WaveView extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMeunItem;
     private javax.swing.JMenu fileMeun;
     private javax.swing.JMenuBar genMeunBar;
-    private javax.swing.JButton minusBTN;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JMenuItem newMeunItem;
     private javax.swing.JMenuItem openMeunItem;
-    private javax.swing.JButton plusBTN;
     private javax.swing.JRadioButton rdbtnFreqView;
     private javax.swing.JRadioButton rdbtnTimeView;
     private javax.swing.JScrollPane scrpanLeft;
