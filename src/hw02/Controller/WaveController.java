@@ -40,7 +40,9 @@ public class WaveController implements ActionListener {
     public void updatewave() {
         if (this.theModel.getWaveform() == WaveForm.FREC) {
             theView.getRdbtnFreqView().setSelected(true);
-            //TODO DFT
+            theModel.FT();
+            this.theView.getWaveFormComponent1().setRawDoubleWave(theModel.getFftWaveL());
+            this.theView.getWaveFormComponent2().setRawDoubleWave(theModel.getFftWaveR());
         } else if (this.theModel.getWaveform() == WaveForm.TIME) {
             theView.getRdbtnTimeView().setSelected(true);
             if (this.theModel.getChannel() == WaveChannel.MONO) {

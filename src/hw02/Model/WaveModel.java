@@ -108,9 +108,13 @@ public class WaveModel {
 
     public void FT() {
         if (this.channel == WaveChannel.DOUBLE) {
-            //TODO DFT
+            this.waveform = WaveForm.FREC;
+            this.fftWaveL = hw02.Model.MathBasic.DFT.getMagnitudeResult(rawWaveL);
+            this.fftWaveR = hw02.Model.MathBasic.DFT.getMagnitudeResult(rawWaveR);
         } else if (this.channel == WaveChannel.MONO) {
-            //TODO DFT
+            this.waveform = WaveForm.FREC;
+            this.fftWaveL = hw02.Model.MathBasic.DFT.getMagnitudeResult(rawWave);
+            this.fftWaveR = this.fftWaveL;
         }
     }
 

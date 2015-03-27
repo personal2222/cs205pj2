@@ -59,10 +59,12 @@ public class WaveFormComponent extends JComponent {
     // Setters
     public void setStartIdx(int startIdx) {
         this.startIdx = startIdx;
+        this.repaint();
     }
 
     public void setEndIdx(int endIdx) {
         this.endIdx = endIdx;
+        this.repaint();
     }
 
     public WaveType getWaveType() {
@@ -71,6 +73,7 @@ public class WaveFormComponent extends JComponent {
 
     public void setWaveType(WaveType waveType) {
         this.waveType = waveType;
+        this.repaint();
     }
 
     public byte[] getRawByteWave() {
@@ -79,6 +82,7 @@ public class WaveFormComponent extends JComponent {
 
     public void setRawByteWave(byte[] rawByteWave) {
         this.rawByteWave = rawByteWave;
+        this.repaint();
     }
 
     public double[] getRawDoubleWave() {
@@ -87,6 +91,7 @@ public class WaveFormComponent extends JComponent {
 
     public void setRawDoubleWave(double[] rawDoubleWave) {
         this.rawDoubleWave = rawDoubleWave;
+        this.repaint();
     }
 
     //Getters

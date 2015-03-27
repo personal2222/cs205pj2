@@ -33,9 +33,18 @@ public class DFT {
      */
     public static Complex[] shortDFT(short[] rawSound) throws LengthNotAPowerOfTwoException {
         Complex[] waveRepr = new Complex[rawSound.length];
-        System.out.println("Reading Wave");
         for (int i = 0; i < waveRepr.length; ++i) {
-            waveRepr[i] = new Complex(rawSound[i] / 1024, 0);
+            waveRepr[i] = new Complex(rawSound[i], 0);
+        }
+        waveRepr = DFT.extendArrayToPowOfTwo(waveRepr);
+        Complex[] result = DFT.FTransform(waveRepr);
+        return result;
+    }
+
+    public static Complex[] byteDFT(byte[] rawSound) throws LengthNotAPowerOfTwoException {
+        Complex[] waveRepr = new Complex[rawSound.length];
+        for (int i = 0; i < waveRepr.length; ++i) {
+            waveRepr[i] = new Complex(rawSound[i], 0);
         }
         waveRepr = DFT.extendArrayToPowOfTwo(waveRepr);
         Complex[] result = DFT.FTransform(waveRepr);
@@ -163,6 +172,20 @@ public class DFT {
         Complex[] result = null;
         try {
             result = DFT.shortDFT(rawWave);
+        } catch (LengthNotAPowerOfTwoException lnpte) {
+            lnpte.printStackTrace();
+        }
+        double[] magArray = new double[result.length];
+        for (int i = 0; i < result.length; ++i) {
+            magArray[i] = result[i].magnitude();
+        }
+        return magArray;
+    }
+
+    public static double[] getMagnitudeResult(byte[] rawWave) {
+        Complex[] result = null;
+        try {
+            result = DFT.byteDFT(rawWave);
         } catch (LengthNotAPowerOfTwoException lnpte) {
             lnpte.printStackTrace();
         }
