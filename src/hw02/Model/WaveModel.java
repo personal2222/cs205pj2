@@ -141,5 +141,8 @@ public class WaveModel {
         this.endIdx = endIdx;
     }
 
-    //TODO USEFT HERE
+    public void FT() {
+        this.fwave = hw02.Model.MathBasic.DFT.getMagnitudeResult(this.rawWave);
+    }
+
 }

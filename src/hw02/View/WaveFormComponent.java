@@ -16,17 +16,45 @@
 package hw02.View;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.geom.Line2D;
 import javax.swing.JComponent;
+import javax.swing.Scrollable;
 
 /**
  *
  * @author Zhengri Fan
  */
-public class WaveFormComponent extends JComponent {
+public class WaveFormComponent extends JComponent implements Scrollable {
+
+    @Override
+    public Dimension getPreferredScrollableViewportSize() {
+        return new Dimension(600, 400); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
+        return 1; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
+        return 1; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean getScrollableTracksViewportWidth() {
+        return true; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean getScrollableTracksViewportHeight() {
+        return true; //To change body of generated methods, choose Tools | Templates.
+    }
 
     enum WaveType {
 
