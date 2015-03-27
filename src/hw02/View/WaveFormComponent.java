@@ -28,7 +28,7 @@ import javax.swing.JComponent;
  */
 public class WaveFormComponent extends JComponent {
 
-    enum WaveType {
+    public enum WaveType {
 
         DOUBLE, BYTE, SHORT;
     }
@@ -41,12 +41,12 @@ public class WaveFormComponent extends JComponent {
     private double[] rawDoubleWave;
 
     public WaveFormComponent() {
-        this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(400, 0.5, 3, hw02.Model.SoundBasic.genTone.ToneType.SINE);
+        this.rawWave = null;
         this.startIdx = 0;
-        this.endIdx = 1000;
-        this.waveType = WaveType.SHORT;
+        this.endIdx = 0;
         this.rawByteWave = null;
         this.rawDoubleWave = null;
+        this.waveType = WaveType.SHORT;
     }
 
     public void setRawWave(short[] rawWave) {

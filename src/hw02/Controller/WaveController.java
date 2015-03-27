@@ -6,6 +6,7 @@
 package hw02.Controller;
 
 import hw02.Model.WaveModel;
+import hw02.Model.WaveModel.WaveChannel;
 import hw02.Model.WaveModel.WaveForm;
 import hw02.View.PopUps;
 import hw02.View.WaveView;
@@ -40,10 +41,19 @@ public class WaveController implements ActionListener, AdjustmentListener {
 
     public void updatewave() {
         if (this.theModel.getWaveform() == WaveForm.FREC) {
-            // this.theView.getWaveFormComponent1().setRawWave(this.theModel.getFwave());
+            //TODO DFT
         } else {
-            this.theView.getWaveFormComponent1().setRawWave(this.theModel.getRawWave());
-            this.theView.getWaveFormComponent2().setRawWave(this.theModel.getRawWave2());
+            if (this.theModel.getChannel() == WaveChannel.MONO) {
+                theView.getWaveFormComponent1().setRawWave(theModel.getRawWave());
+                theView.getWaveFormComponent2().setRawWave(theModel.getRawWave());
+                theView.getWaveFormComponent1().setWaveType(hw02.View.WaveFormComponent.WaveType.SHORT);
+                theView.getWaveFormComponent2().setWaveType(hw02.View.WaveFormComponent.WaveType.SHORT);
+            } else if (this.theModel.getChannel() == WaveChannel.DOUBLE) {
+                theView.getWaveFormComponent1().setRawByteWave(theModel.getRawWaveL());
+                theView.getWaveFormComponent2().setRawByteWave(theModel.getRawWaveR());
+                theView.getWaveFormComponent1().setWaveType(hw02.View.WaveFormComponent.WaveType.BYTE);
+                theView.getWaveFormComponent2().setWaveType(hw02.View.WaveFormComponent.WaveType.BYTE);
+            }
         }
     }
 

@@ -9,8 +9,6 @@ import hw02.Model.SoundBasic.Sound;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.BoundedRangeModel;
-import javax.swing.DefaultBoundedRangeModel;
 
 /**
  *
@@ -34,34 +32,31 @@ public class WaveModel {
     }
 
     private short[] rawWave;
-    private short[] rawWave2;
+    private double[] fftWaveL;
+    private double[] fftWaveR;
+    private byte[] rawWaveL;
+    private byte[] rawWaveR;
     private int startIdx;
     private int endIdx;
     private WaveType wavetype;
     private WaveForm waveform;
     private WaveChannel channel;
-    private double[] fwave;
-    private Sound raw;
-    private BoundedRangeModel Range;
-    private short[] shortf;
 
     public WaveModel() throws UnsupportedAudioFileException {
         this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(0, 0, 3, hw02.Model.SoundBasic.genTone.ToneType.SINE);
-        this.rawWave2 = this.rawWave;
-        this.raw = hw02.Model.SoundBasic.genTone.translateToSound(this.rawWave);
+        this.fftWaveL = null;
+        this.fftWaveR = null;
+        this.rawWaveL = null;
+        this.rawWaveR = null;
         this.startIdx = 0;
-        this.endIdx = 1000;
+        this.endIdx = this.rawWaveL.length;
         this.wavetype = WaveType.GENARATED;
         this.waveform = WaveForm.TIME;
         this.channel = WaveChannel.MONO;
-        this.Range = new DefaultBoundedRangeModel((int) endIdx - startIdx, 0, startIdx,
-                                                  endIdx);
     }
 
     public void generateWaveModel(short[] raw) throws UnsupportedAudioFileException {
         this.rawWave = raw;
-        this.rawWave2 = raw;
-        this.raw = hw02.Model.SoundBasic.genTone.translateToSound(this.rawWave);
         this.wavetype = WaveType.GENARATED;
         this.waveform = WaveForm.TIME;
         this.channel = WaveChannel.MONO;
@@ -69,53 +64,31 @@ public class WaveModel {
 
     //TODO TEST
     public void readFileWaveModel(File fileinput) throws IOException, UnsupportedAudioFileException {
-        this.rawWave = hw02.Model.SoundBasic.SoundIO.read(fileinput.getPath()).getShortRepresentation();
-        this.raw = hw02.Model.SoundBasic.SoundIO.read(fileinput.getPath());
+        Sound rawSound = hw02.Model.SoundBasic.SoundIO.read(fileinput.getPath());
+        this.rawWave = rawSound.getShortRepresentation();
         this.waveform = WaveForm.TIME;
         this.wavetype = WaveType.READFILE;
-        if (this.raw.getAf().getChannels() == 1) {
+        if (rawSound.getAf().getChannels() == 1) {
             this.channel = WaveChannel.MONO;
-            this.rawWave2 = this.rawWave;
-
+            this.startIdx = 0;
+            this.endIdx = this.rawWave.length;
         } else {
-            this.rawWave2 = this.rawWave;
+            this.rawWaveL = new byte[this.rawWave.length];
+            this.rawWaveR = new byte[this.rawWave.length];
             this.channel = WaveChannel.DOUBLE;
-            int temp = 0;
-            for (short i : this.rawWave) {
-                short j = (short) (i & 0xff);
-                i = (short) (i >> 8);
-                this.rawWave[temp] = (short) (i * Math.pow(2, 8));
-                this.rawWave2[temp] = (short) (j * Math.pow(2, 8));
-                temp++;
+            int idx = 0;
+            for (short i : this.rawWaveL) {
+                this.rawWaveL[idx] = (byte) (i >> 8);
+                this.rawWaveR[idx] = (byte) (i & 0xff);
+                idx++;
             }
-
+            this.startIdx = 0;
+            this.endIdx = this.rawWaveL.length;
         }
-        this.startIdx = 0;
-        this.endIdx = this.rawWave.length;
-    }
-
-    public short[] getRawWave2() {
-        return rawWave2;
     }
 
     public WaveChannel getChannel() {
         return channel;
-    }
-
-    public double[] getFwave() {
-        return fwave;
-    }
-
-    public Sound getRaw() {
-        return raw;
-    }
-
-    public short[] getRawWave() {
-        return rawWave;
-    }
-
-    public void setRawWave(short[] rawWave) {
-        this.rawWave = rawWave;
     }
 
     public int getStartIdx() {
@@ -143,11 +116,11 @@ public class WaveModel {
     }
 
     public void FT() {
-        this.fwave = hw02.Model.MathBasic.DFT.getMagnitudeResult(this.rawWave);
-    }
-
-    public void setRawWave2(short[] rawWave2) {
-        this.rawWave2 = rawWave2;
+        if (this.channel == WaveChannel.DOUBLE) {
+            //TODO DFT
+        } else if (this.channel == WaveChannel.MONO) {
+            //TODO DFT
+        }
     }
 
     public void setWavetype(WaveType wavetype) {
@@ -162,19 +135,44 @@ public class WaveModel {
         this.channel = channel;
     }
 
-    public void setFwave(double[] fwave) {
-        this.fwave = fwave;
+    public short[] getRawWave() {
+        return rawWave;
     }
 
-    public void setRaw(Sound raw) {
-        this.raw = raw;
+    public void setRawWave(short[] rawWave) {
+        this.rawWave = rawWave;
     }
 
-    public void setRange(BoundedRangeModel Range) {
-        this.Range = Range;
+    public double[] getFftWaveL() {
+        return fftWaveL;
     }
 
-    public void setShortf(short[] shortf) {
-        this.shortf = shortf;
+    public void setFftWaveL(double[] fftWaveL) {
+        this.fftWaveL = fftWaveL;
     }
+
+    public double[] getFftWaveR() {
+        return fftWaveR;
+    }
+
+    public void setFftWaveR(double[] fftWaveR) {
+        this.fftWaveR = fftWaveR;
+    }
+
+    public byte[] getRawWaveL() {
+        return rawWaveL;
+    }
+
+    public void setRawWaveL(byte[] rawWaveL) {
+        this.rawWaveL = rawWaveL;
+    }
+
+    public byte[] getRawWaveR() {
+        return rawWaveR;
+    }
+
+    public void setRawWaveR(byte[] rawWaveR) {
+        this.rawWaveR = rawWaveR;
+    }
+
 }
