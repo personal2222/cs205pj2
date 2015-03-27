@@ -36,14 +36,12 @@ public class WaveFormComponent extends JComponent {
     private short[] rawWave;
     private int startIdx;
     private int endIdx;
-    private double amplifier;
     private WaveType waveType;
 
     public WaveFormComponent() {
         this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(400, 0.5, 3, hw02.Model.SoundBasic.genTone.ToneType.SINE);
         this.startIdx = 0;
         this.endIdx = 1000;
-        this.amplifier = 1;
         this.waveType = WaveType.SHORT;
     }
 
@@ -80,18 +78,6 @@ public class WaveFormComponent extends JComponent {
         return endIdx;
     }
 
-    public double getAmplifier() {
-        return amplifier;
-    }
-
-    public void setAmplifier(double amplifier) {
-        this.amplifier = amplifier;
-    }
-
-    public void zoom(double percentage) {
-        this.amplifier *= (1 + percentage);
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
         if (this.waveType == WaveType.SHORT) {
@@ -113,8 +99,8 @@ public class WaveFormComponent extends JComponent {
         g2d.draw(lineToRender);
         g2d.setColor(Color.BLUE);
         for (int i = this.startIdx; i < this.endIdx; ++i) {
-            int yValue = (int) (((((double) this.getHeight() / 2) / Short.MAX_VALUE) * this.rawWave[i]) * this.amplifier);
-            int xValue = (int) (((this.getWidth() / (double) (this.endIdx - this.startIdx)) * i) * this.amplifier);
+            int yValue = (int) (((((double) this.getHeight() / 2) / Short.MAX_VALUE) * this.rawWave[i]));
+            int xValue = i;
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
             g2d.draw(lineToRender);
@@ -132,8 +118,8 @@ public class WaveFormComponent extends JComponent {
         g2d.draw(lineToRender);
         g2d.setColor(Color.BLUE);
         for (int i = this.startIdx; i < this.endIdx; ++i) {
-            int yValue = (int) (((((double) this.getHeight() / 2) / Byte.MAX_VALUE) * this.rawWave[i]) * this.amplifier);
-            int xValue = (int) (((this.getWidth() / (double) (this.endIdx - this.startIdx)) * i) * this.amplifier);
+            int yValue = (int) (((((double) this.getHeight() / 2) / Byte.MAX_VALUE) * this.rawWave[i]));
+            int xValue = i;
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
             g2d.draw(lineToRender);
@@ -151,8 +137,8 @@ public class WaveFormComponent extends JComponent {
         g2d.draw(lineToRender);
         g2d.setColor(Color.BLUE);
         for (int i = this.startIdx; i < this.endIdx; ++i) {
-            int yValue = (int) (((((double) this.getHeight() / 2) / Double.MAX_VALUE) * this.rawWave[i]) * this.amplifier);
-            int xValue = (int) (((this.getWidth() / (double) (this.endIdx - this.startIdx)) * i) * this.amplifier);
+            int yValue = (int) (((((double) this.getHeight() / 2) / Double.MAX_VALUE) * this.rawWave[i]));
+            int xValue = i;
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
             g2d.draw(lineToRender);

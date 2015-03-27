@@ -6,6 +6,7 @@
 package hw02.Controller;
 
 import hw02.Model.WaveModel;
+import hw02.View.PopUps;
 import hw02.View.WaveView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +32,7 @@ public class WaveController implements ActionListener, AdjustmentListener {
         this.theView = theView;
         theView.getNewMeunItem().addActionListener(this);
         theView.getOpenMeunItem().addActionListener(this);
+        theView.getExitMeunItem().addActionListener(this);
         updatewave();
     }
 
@@ -59,16 +61,18 @@ public class WaveController implements ActionListener, AdjustmentListener {
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(null, "File Error", "Bad File", JOptionPane.ERROR_MESSAGE);
                     continue;
-
                 } catch (UnsupportedAudioFileException ex) {
                     JOptionPane.showMessageDialog(null, "UnSupported Audio", "Bad File", JOptionPane.ERROR_MESSAGE);
                     continue;
-
                 }
-
             }//TODO:BUG WITH STEREO
             updatewave();
-
+        } else if (e.getSource() == theView.getExitMeunItem()) {
+            boolean isExit = PopUps.exitComfirm();
+            if (isExit) {
+                theView.dispose();
+                System.exit(0);
+            }
         }
     }
 
