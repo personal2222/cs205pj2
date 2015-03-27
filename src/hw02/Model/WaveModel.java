@@ -16,11 +16,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class WaveModel {
 
-    public static enum WaveType {
-
-        GENARATED, READFILE;
-    }
-
     public static enum WaveForm {
 
         TIME, FREC;
@@ -38,7 +33,6 @@ public class WaveModel {
     private byte[] rawWaveR;
     private int startIdx;
     private int endIdx;
-    private WaveType wavetype;
     private WaveForm waveform;
     private WaveChannel channel;
 
@@ -49,17 +43,19 @@ public class WaveModel {
         this.rawWaveL = null;
         this.rawWaveR = null;
         this.startIdx = 0;
-        this.endIdx = this.rawWaveL.length;
-        this.wavetype = WaveType.GENARATED;
+        this.endIdx = this.rawWave.length;
         this.waveform = WaveForm.TIME;
         this.channel = WaveChannel.MONO;
     }
 
     public void generateWaveModel(short[] raw) throws UnsupportedAudioFileException {
-        this.rawWave = raw;
-        this.wavetype = WaveType.GENARATED;
-        this.waveform = WaveForm.TIME;
-        this.channel = WaveChannel.MONO;
+        if (raw != null) {
+            this.rawWave = raw;
+            this.waveform = WaveForm.TIME;
+            this.channel = WaveChannel.MONO;
+            this.startIdx = 0;
+            this.endIdx = this.rawWave.length;
+        }
     }
 
     //TODO TEST
@@ -67,7 +63,6 @@ public class WaveModel {
         Sound rawSound = hw02.Model.SoundBasic.SoundIO.read(fileinput.getPath());
         this.rawWave = rawSound.getShortRepresentation();
         this.waveform = WaveForm.TIME;
-        this.wavetype = WaveType.READFILE;
         if (rawSound.getAf().getChannels() == 1) {
             this.channel = WaveChannel.MONO;
             this.startIdx = 0;
@@ -95,10 +90,6 @@ public class WaveModel {
         return startIdx;
     }
 
-    public WaveType getWavetype() {
-        return wavetype;
-    }
-
     public WaveForm getWaveform() {
         return waveform;
     }
@@ -121,10 +112,6 @@ public class WaveModel {
         } else if (this.channel == WaveChannel.MONO) {
             //TODO DFT
         }
-    }
-
-    public void setWavetype(WaveType wavetype) {
-        this.wavetype = wavetype;
     }
 
     public void setWaveform(WaveForm waveform) {

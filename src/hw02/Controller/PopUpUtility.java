@@ -111,9 +111,14 @@ public class PopUpUtility {
             }
             try {
                 duration = Double.parseDouble(durationStr);
-                return duration;
+                if (duration <= 100) {
+                    return duration;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid input, We cannot support duration greater than 100.", "Bad input", JOptionPane.ERROR_MESSAGE);
+                    continue;
+                }
             } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(null, "Invalid input, plaese input an interger for frequency.", "Bad input", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Invalid input, plaese input a reael number for duration.", "Bad input", JOptionPane.ERROR_MESSAGE);
                 continue;
             }
         }

@@ -52,7 +52,10 @@ public class genTone {
      * @return a short array representing the generated frequency
      */
     public static short[] generatePureTone(double freq, double amplitude, double duration, ToneType toneType) {
-        if (toneType == ToneType.SINE) {
+        if (duration == 0) {
+            short[] result = {0};
+            return result;
+        } else if (toneType == ToneType.SINE) {
             return gennToneSin(freq, amplitude, duration);
         } else if (toneType == ToneType.SAWTOOTH) {
             return gennToneSaw(freq, amplitude, duration);
@@ -110,17 +113,21 @@ public class genTone {
     private static short[] gennToneSaw(double freq, double amplitude, double duration) {
         int totSlot = (int) (duration * genTone.stdFreq);
         int slotsPerWave = (int) (genTone.stdFreq / freq);
-        int halfWave = slotsPerWave / 2;
         short actualAmplitude = (short) (amplitude * Short.MAX_VALUE / 2);
-        short ampIncreasePerSlot = (short) (2 * actualAmplitude / halfWave);
+        short ampIncreasePerSlot = (short) (2 * actualAmplitude / slotsPerWave);
         short[] generatedWave = new short[totSlot];
         for (int i = 0; i < (generatedWave.length); ++i) {
-            int indexInHalfWave = i % halfWave;
-            int indexOfHalfWave = i / halfWave;
-            if (((indexInHalfWave) < (halfWave / (2.0))) && indexOfHalfWave % 2 == 0) {
-                generatedWave[i] = (short) (-actualAmplitude + indexInHalfWave * ampIncreasePerSlot);
+//            int indexInHalfWave = i % halfWave;
+//            int indexOfHalfWave = i / halfWave;
+//            if (((indexInHalfWave) < (halfWave / (2.0))) && indexOfHalfWave % 2 == 0) {
+//                generatedWave[i] = (short) (-actualAmplitude + indexInHalfWave * ampIncreasePerSlot);
+//            } else {
+//                generatedWave[i] = (short) (actualAmplitude - indexInHalfWave * ampIncreasePerSlot);
+//            }
+            if ((i % slotsPerWave) == 0) {
+                generatedWave[i] = (short) (-actualAmplitude);
             } else {
-                generatedWave[i] = (short) (actualAmplitude - indexInHalfWave * ampIncreasePerSlot);
+                generatedWave[i] = (short) (ampIncreasePerSlot + generatedWave[i - 1]);
             }
         }
         return generatedWave;

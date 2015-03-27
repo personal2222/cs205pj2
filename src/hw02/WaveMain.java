@@ -52,9 +52,7 @@ public class WaveMain {
                 } catch (UnsupportedAudioFileException ex) {
                     Logger.getLogger(WaveMain.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
                 theView.setVisible(true);
-
             }
         });
     }

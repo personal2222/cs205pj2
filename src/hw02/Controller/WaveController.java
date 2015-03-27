@@ -12,8 +12,6 @@ import hw02.View.PopUps;
 import hw02.View.WaveView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +22,7 @@ import javax.swing.JOptionPane;
  *
  * @author huangjiayu
  */
-public class WaveController implements ActionListener, AdjustmentListener {
+public class WaveController implements ActionListener {
 
     private WaveModel theModel;
     private WaveView theView;
@@ -41,18 +39,28 @@ public class WaveController implements ActionListener, AdjustmentListener {
 
     public void updatewave() {
         if (this.theModel.getWaveform() == WaveForm.FREC) {
+            theView.getRdbtnFreqView().setSelected(true);
             //TODO DFT
-        } else {
+        } else if (this.theModel.getWaveform() == WaveForm.TIME) {
+            theView.getRdbtnTimeView().setSelected(true);
             if (this.theModel.getChannel() == WaveChannel.MONO) {
                 theView.getWaveFormComponent1().setRawWave(theModel.getRawWave());
                 theView.getWaveFormComponent2().setRawWave(theModel.getRawWave());
                 theView.getWaveFormComponent1().setWaveType(hw02.View.WaveFormComponent.WaveType.SHORT);
                 theView.getWaveFormComponent2().setWaveType(hw02.View.WaveFormComponent.WaveType.SHORT);
+                theView.getWaveFormComponent1().setStartIdx(theModel.getStartIdx());
+                theView.getWaveFormComponent1().setEndIdx(theModel.getEndIdx());
+                theView.getWaveFormComponent2().setStartIdx(theModel.getStartIdx());
+                theView.getWaveFormComponent2().setEndIdx(theModel.getEndIdx());
             } else if (this.theModel.getChannel() == WaveChannel.DOUBLE) {
                 theView.getWaveFormComponent1().setRawByteWave(theModel.getRawWaveL());
                 theView.getWaveFormComponent2().setRawByteWave(theModel.getRawWaveR());
                 theView.getWaveFormComponent1().setWaveType(hw02.View.WaveFormComponent.WaveType.BYTE);
                 theView.getWaveFormComponent2().setWaveType(hw02.View.WaveFormComponent.WaveType.BYTE);
+                theView.getWaveFormComponent1().setStartIdx(theModel.getStartIdx());
+                theView.getWaveFormComponent1().setEndIdx(theModel.getEndIdx());
+                theView.getWaveFormComponent2().setStartIdx(theModel.getStartIdx());
+                theView.getWaveFormComponent2().setEndIdx(theModel.getEndIdx());
             }
         }
     }
@@ -68,11 +76,8 @@ public class WaveController implements ActionListener, AdjustmentListener {
             updatewave();
         } else if (e.getSource() == theView.getOpenMeunItem()) {
             while (true) {
-
                 try {
                     this.theModel.readFileWaveModel(PopUpUtility.getFile());
-                    //this.theView.getWaveFormComponent1().setEndIdx(this.theModel.getEndIdx());
-                    //this.theView.getWaveFormComponent2().setEndIdx(this.theModel.getEndIdx());
                     break;
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(null, "File Error", "Bad File", JOptionPane.ERROR_MESSAGE);
@@ -82,9 +87,6 @@ public class WaveController implements ActionListener, AdjustmentListener {
                     continue;
                 }
             }
-            this.theModel.setEndIdx(theModel.getRawWave().length);
-            this.theView.getWaveFormComponent1().setEndIdx(this.theModel.getEndIdx());
-            this.theView.getWaveFormComponent2().setEndIdx(this.theModel.getEndIdx());
             updatewave();
         } else if (e.getSource() == theView.getExitMeunItem()) {
             boolean isExit = PopUps.exitComfirm();
@@ -92,17 +94,14 @@ public class WaveController implements ActionListener, AdjustmentListener {
                 theView.dispose();
                 System.exit(0);
             }
+
         } else if (e.getSource() == theView.getRdbtnFreqView()) {
             theModel.FT();
             theModel.setWaveform(WaveForm.FREC);
             updatewave();
-        }
-    }
-
-    @Override
-    public void adjustmentValueChanged(AdjustmentEvent e) {
-        if (e.getSource() == theView.getScrpanLeft().getVerticalScrollBar()) {
-
+        } else if (e.getSource() == theView.getRdbtnTimeView()) {
+            theModel.setWaveform(WaveForm.TIME);
+            updatewave();
         }
     }
 

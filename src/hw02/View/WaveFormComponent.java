@@ -39,6 +39,7 @@ public class WaveFormComponent extends JComponent {
     private WaveType waveType;
     private byte[] rawByteWave;
     private double[] rawDoubleWave;
+    private int amplifier;
 
     public WaveFormComponent() {
         this.rawWave = null;
@@ -47,17 +48,12 @@ public class WaveFormComponent extends JComponent {
         this.rawByteWave = null;
         this.rawDoubleWave = null;
         this.waveType = WaveType.SHORT;
+        this.amplifier = 1;
     }
 
     public void setRawWave(short[] rawWave) {
         this.rawWave = rawWave;
         this.repaint();
-    }
-
-    public WaveFormComponent(short[] rawWave, int startIdx, int endIdx) {
-        this.rawWave = rawWave;
-        this.startIdx = startIdx;
-        this.endIdx = endIdx;
     }
 
     // Setters
@@ -128,7 +124,7 @@ public class WaveFormComponent extends JComponent {
         g2d.setColor(Color.BLUE);
         for (int i = this.startIdx; i < this.endIdx; ++i) {
             int yValue = (int) (((((double) this.getHeight() / 2) / Short.MAX_VALUE) * this.rawWave[i]));
-            int xValue = i;
+            int xValue = i * this.amplifier;
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
             g2d.draw(lineToRender);
@@ -147,7 +143,7 @@ public class WaveFormComponent extends JComponent {
         g2d.setColor(Color.BLUE);
         for (int i = this.startIdx; i < this.endIdx; ++i) {
             int yValue = (int) (((((double) this.getHeight() / 2) / Byte.MAX_VALUE) * this.rawByteWave[i]));
-            int xValue = i;
+            int xValue = i * this.amplifier;
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
             g2d.draw(lineToRender);
@@ -166,11 +162,27 @@ public class WaveFormComponent extends JComponent {
         g2d.setColor(Color.BLUE);
         for (int i = this.startIdx; i < this.endIdx; ++i) {
             int yValue = (int) (((((double) this.getHeight() / 2) / Double.MAX_VALUE) * this.rawDoubleWave[i]));
-            int xValue = i;
+            int xValue = i * this.amplifier;
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
             g2d.draw(lineToRender);
             prevPoint = curPoint;
+        }
+    }
+
+    public boolean isShrinkable() {
+        return (this.amplifier <= 1);
+    }
+
+    public void zoomIn() {
+        this.amplifier *= 2;
+    }
+
+    public void zoomOut() {
+        if (this.isShrinkable()) {
+            this.amplifier /= 2;
+        } else {
+            return;
         }
     }
 

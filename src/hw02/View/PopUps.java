@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class PopUps {
 
     public static String durationPopUp() {
-        String durationStr = JOptionPane.showInputDialog(null, "How long is your generated tone?\nWe can only take in real numbers as input", 0);
+        String durationStr = JOptionPane.showInputDialog(null, "How long is your generated tone in seconds?\nWe can only take in real numbers as input", 0);
         return durationStr;
     }
 
