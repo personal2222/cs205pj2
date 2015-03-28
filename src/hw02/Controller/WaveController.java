@@ -80,7 +80,10 @@ public class WaveController implements ActionListener {
         } else {
             this.theView.getMinusBTN().setEnabled(true);
         }
-
+        this.theView.getWaveFormComponent1().setSampleRate(this.theModel.getSampleRate());
+        this.theView.getWaveFormComponent2().setSampleRate(this.theModel.getSampleRate());
+        this.theView.getScrpanLeft().getHorizontalScrollBar().repaint();
+        this.theView.getScrpanRight().getHorizontalScrollBar().repaint();
     }
 
     @Override

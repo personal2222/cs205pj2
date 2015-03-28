@@ -117,13 +117,6 @@ public class genTone {
         short ampIncreasePerSlot = (short) (2 * actualAmplitude / slotsPerWave);
         short[] generatedWave = new short[totSlot];
         for (int i = 0; i < (generatedWave.length); ++i) {
-//            int indexInHalfWave = i % halfWave;
-//            int indexOfHalfWave = i / halfWave;
-//            if (((indexInHalfWave) < (halfWave / (2.0))) && indexOfHalfWave % 2 == 0) {
-//                generatedWave[i] = (short) (-actualAmplitude + indexInHalfWave * ampIncreasePerSlot);
-//            } else {
-//                generatedWave[i] = (short) (actualAmplitude - indexInHalfWave * ampIncreasePerSlot);
-//            }
             if ((i % slotsPerWave) == 0) {
                 generatedWave[i] = (short) (-actualAmplitude);
             } else {
@@ -151,6 +144,10 @@ public class genTone {
             generatedWave[i] = (short) (actualAmplitude * Math.sin(2 * Math.PI * freq * i / genTone.stdFreq));
         }
         return generatedWave;
+    }
+
+    public static double getStdFreq() {
+        return stdFreq;
     }
 
 }

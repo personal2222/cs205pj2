@@ -6,6 +6,7 @@
 package hw02.Model;
 
 import hw02.Model.SoundBasic.Sound;
+import hw02.Model.SoundBasic.genTone;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -36,6 +37,7 @@ public class WaveModel {
     private WaveForm waveform;
     private WaveChannel channel;
     private double amplifier;
+    private double sampleRate;
     public final double DEFAULTAMP = 0.03125;
 
     public WaveModel() throws UnsupportedAudioFileException {
@@ -58,6 +60,7 @@ public class WaveModel {
             this.channel = WaveChannel.MONO;
             this.startIdx = 0;
             this.endIdx = this.rawWave.length;
+            this.sampleRate = genTone.getStdFreq();
         }
     }
 
@@ -67,6 +70,7 @@ public class WaveModel {
             return;
         }
         Sound rawSound = hw02.Model.SoundBasic.SoundIO.read(fileinput.getPath());
+        this.sampleRate = rawSound.getAf().getSampleRate();
         this.rawWave = rawSound.getShortRepresentation();
         this.waveform = WaveForm.TIME;
         if (rawSound.getAf().getChannels() == 1) {
@@ -77,12 +81,6 @@ public class WaveModel {
             this.rawWaveL = new short[this.rawWave.length / 2];
             this.rawWaveR = new short[this.rawWave.length / 2];
             this.channel = WaveChannel.DOUBLE;
-//            int idx = 0;
-//            for (short i : this.rawWave) {
-//                this.rawWaveL[idx] = (byte) (i >> 8);
-//                this.rawWaveR[idx] = (byte) (i & 0xff);
-//                idx++;
-//            }
             for (int i = 0; i < this.rawWave.length / 2; ++i) {
                 this.rawWaveL[i] = this.rawWave[2 * i];
                 this.rawWaveR[i] = this.rawWave[2 * i + 1];
@@ -114,6 +112,14 @@ public class WaveModel {
 
     public void setEndIdx(int endIdx) {
         this.endIdx = endIdx;
+    }
+
+    public double getSampleRate() {
+        return sampleRate;
+    }
+
+    public void setSampleRate(double sampleRate) {
+        this.sampleRate = sampleRate;
     }
 
     public void FT() {
