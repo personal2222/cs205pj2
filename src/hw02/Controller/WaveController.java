@@ -9,6 +9,7 @@ import hw02.Model.WaveModel;
 import hw02.Model.WaveModel.WaveChannel;
 import hw02.Model.WaveModel.WaveForm;
 import hw02.View.PopUps;
+import hw02.View.WaveFormComponent;
 import hw02.View.WaveView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,9 +43,10 @@ public class WaveController implements ActionListener {
     public void updatewave() {
         if (this.theModel.getWaveform() == WaveForm.FREC) {
             theView.getRdbtnFreqView().setSelected(true);
-            theModel.FT();
             this.theView.getWaveFormComponent1().setRawDoubleWave(theModel.getFftWaveL());
             this.theView.getWaveFormComponent2().setRawDoubleWave(theModel.getFftWaveR());
+            this.theView.getWaveFormComponent2().setWaveType(WaveFormComponent.WaveType.DOUBLE);
+            this.theView.getWaveFormComponent1().setWaveType(WaveFormComponent.WaveType.DOUBLE);
             this.theView.getWaveFormComponent1().setAmplifier(this.theModel.getAmplifier());
             this.theView.getWaveFormComponent2().setAmplifier(this.theModel.getAmplifier());
         } else if (this.theModel.getWaveform() == WaveForm.TIME) {
@@ -107,7 +109,6 @@ public class WaveController implements ActionListener {
 
         } else if (e.getSource() == theView.getRdbtnFreqView()) {
             theModel.FT();
-            theModel.setWaveform(WaveForm.FREC);
             updatewave();
         } else if (e.getSource() == theView.getRdbtnTimeView()) {
             theModel.setWaveform(WaveForm.TIME);

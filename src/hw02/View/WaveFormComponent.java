@@ -175,7 +175,7 @@ public class WaveFormComponent extends JComponent {
         double max = this.maxAbsDouble();
         for (int i = this.startIdx; i < this.endIdx; ++i) {
             int yValue = (int) (((((double) this.getHeight() / 2) / max) * this.rawDoubleWave[i]));
-            int xValue = (int) (i * this.amplifier);
+            int xValue = (int) (i * this.amplifier) * 44100 / this.endIdx;
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
             g2d.draw(lineToRender);
