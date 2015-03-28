@@ -173,7 +173,7 @@ public class WaveModel {
     }
 
     public boolean isShrinkable() {
-        return (this.amplifier <= DEFAULTAMP);
+        return (this.amplifier > DEFAULTAMP);
     }
 
     public double getAmplifier() {

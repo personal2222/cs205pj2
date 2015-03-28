@@ -73,6 +73,12 @@ public class WaveController implements ActionListener {
                 this.theView.getWaveFormComponent2().setAmplifier(this.theModel.getAmplifier());
             }
         }
+        if (!this.theModel.isShrinkable()) {
+            this.theView.getMinusBTN().setEnabled(false);
+        } else {
+            this.theView.getMinusBTN().setEnabled(true);
+        }
+
     }
 
     @Override
