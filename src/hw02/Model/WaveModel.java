@@ -61,6 +61,9 @@ public class WaveModel {
     //TODO TEST
     public void readFileWaveModel(File fileinput) throws IOException, UnsupportedAudioFileException {
         Sound rawSound = hw02.Model.SoundBasic.SoundIO.read(fileinput.getPath());
+        if (rawSound == null) {
+            return;
+        }
         this.rawWave = rawSound.getShortRepresentation();
         this.waveform = WaveForm.TIME;
         if (rawSound.getAf().getChannels() == 1) {

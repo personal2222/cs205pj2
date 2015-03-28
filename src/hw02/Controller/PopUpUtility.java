@@ -20,13 +20,18 @@ public class PopUpUtility {
     public static short[] genWave() {
         ToneType toneType = PopUpUtility.getToneType();
         int freq = PopUpUtility.getFreq();
-        double amplitude = PopUpUtility.getAmplitude();
-        double duration = PopUpUtility.getDuration();
-        if (freq == -1 || amplitude == -1 || duration == -1) {
+        if (freq == -1) {
             return null;
-        } else {
-            return genTone.generatePureTone(freq, amplitude, duration, toneType);
         }
+        double amplitude = PopUpUtility.getAmplitude();
+        if (amplitude == -1) {
+            return null;
+        }
+        double duration = PopUpUtility.getDuration();
+        if (duration == -1) {
+            return null;
+        }
+        return genTone.generatePureTone(freq, amplitude, duration, toneType);
     }
 
     public static ToneType getToneType() {

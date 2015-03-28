@@ -40,7 +40,8 @@ public class WaveFormComponent extends JComponent {
     private WaveType waveType;
     private byte[] rawByteWave;
     private double[] rawDoubleWave;
-    private int amplifier;
+    private double amplifier;
+    private final double DEFAULTAMP = 0.03125;
 
     public WaveFormComponent() {
         this.rawWave = null;
@@ -49,7 +50,7 @@ public class WaveFormComponent extends JComponent {
         this.rawByteWave = null;
         this.rawDoubleWave = null;
         this.waveType = WaveType.SHORT;
-        this.amplifier = 1;
+        this.amplifier = DEFAULTAMP;
     }
 
     public void setRawWave(short[] rawWave) {
@@ -130,7 +131,7 @@ public class WaveFormComponent extends JComponent {
         g2d.setColor(Color.BLUE);
         for (int i = this.startIdx; i < this.endIdx; ++i) {
             int yValue = (int) (((((double) this.getHeight() / 2) / Short.MAX_VALUE) * this.rawWave[i]));
-            int xValue = i * this.amplifier;
+            int xValue = (int) (i * this.amplifier);
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
             g2d.draw(lineToRender);
@@ -149,7 +150,7 @@ public class WaveFormComponent extends JComponent {
         g2d.setColor(Color.BLUE);
         for (int i = this.startIdx; i < this.endIdx; ++i) {
             int yValue = (int) (((((double) this.getHeight() / 2) / Byte.MAX_VALUE) * this.rawByteWave[i]));
-            int xValue = i * this.amplifier;
+            int xValue = (int) (i * this.amplifier);
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
             g2d.draw(lineToRender);
@@ -174,7 +175,7 @@ public class WaveFormComponent extends JComponent {
         double max = this.maxAbsDouble();
         for (int i = this.startIdx; i < this.endIdx; ++i) {
             int yValue = (int) (((((double) this.getHeight() / 2) / max) * this.rawDoubleWave[i]));
-            int xValue = i * this.amplifier;
+            int xValue = (int) (i * this.amplifier);
             curPoint = new Point(xValue, yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
             g2d.draw(lineToRender);
@@ -183,7 +184,7 @@ public class WaveFormComponent extends JComponent {
     }
 
     public boolean isShrinkable() {
-        return (this.amplifier <= 1);
+        return (this.amplifier <= DEFAULTAMP);
     }
 
     public void zoomIn() {
