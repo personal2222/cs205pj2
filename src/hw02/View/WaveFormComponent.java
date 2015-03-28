@@ -16,6 +16,7 @@
 package hw02.View;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -154,6 +155,11 @@ public class WaveFormComponent extends JComponent {
             g2d.draw(lineToRender);
             prevPoint = curPoint;
         }
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(this.endIdx, 100); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void paintDouble(Graphics g) {

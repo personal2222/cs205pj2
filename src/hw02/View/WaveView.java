@@ -105,8 +105,9 @@ public class WaveView extends javax.swing.JFrame {
         );
 
         scrpanLeft.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrpanLeft.setViewportView(waveFormComponent1);
 
-        waveFormComponent1.setPreferredSize(new java.awt.Dimension(waveFormComponent1.getEndIdx(), 100));
+        waveFormComponent1.setPreferredSize(waveFormComponent1.getPreferredSize());
         scrpanLeft.setViewportView(waveFormComponent1);
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
@@ -167,7 +168,7 @@ public class WaveView extends javax.swing.JFrame {
                         .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(19, 19, 19))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
-                        .addComponent(scrpanRight)
+                        .addComponent(scrpanRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         rightPanelLayout.setVerticalGroup(
@@ -233,7 +234,7 @@ public class WaveView extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
+                    .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
