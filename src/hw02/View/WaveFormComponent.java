@@ -31,26 +31,35 @@ public class WaveFormComponent extends JComponent {
 
     public enum WaveType {
 
-        DOUBLE, BYTE, SHORT;
+        DOUBLE, SHORT;
     }
 
     private short[] rawWave;
     private int startIdx;
     private int endIdx;
     private WaveType waveType;
-    private byte[] rawByteWave;
+//    private byte[] rawByteWave;
     private double[] rawDoubleWave;
     private double amplifier;
     public final double DEFAULTAMP = 0.03125;
+    private double sampleRate;
 
     public WaveFormComponent() {
         this.rawWave = null;
         this.startIdx = 0;
         this.endIdx = 0;
-        this.rawByteWave = null;
         this.rawDoubleWave = null;
         this.waveType = WaveType.SHORT;
         this.amplifier = DEFAULTAMP;
+        this.sampleRate = 44100;
+    }
+
+    public double getSampleRate() {
+        return sampleRate;
+    }
+
+    public void setSampleRate(double sampleRate) {
+        this.sampleRate = sampleRate;
     }
 
     public void setRawWave(short[] rawWave) {
@@ -75,15 +84,6 @@ public class WaveFormComponent extends JComponent {
 
     public void setWaveType(WaveType waveType) {
         this.waveType = waveType;
-        this.repaint();
-    }
-
-    public byte[] getRawByteWave() {
-        return rawByteWave;
-    }
-
-    public void setRawByteWave(byte[] rawByteWave) {
-        this.rawByteWave = rawByteWave;
         this.repaint();
     }
 
@@ -113,8 +113,6 @@ public class WaveFormComponent extends JComponent {
     protected void paintComponent(Graphics g) {
         if (this.waveType == WaveType.SHORT) {
             this.paintShort(g);
-        } else if (this.waveType == WaveType.BYTE) {
-            this.paintByte(g);
         } else if (this.waveType == WaveType.DOUBLE) {
             this.paintDouble(g);
         }
@@ -139,28 +137,13 @@ public class WaveFormComponent extends JComponent {
         }
     }
 
-    private void paintByte(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        Point prevPoint = new Point(0, this.getHeight() / 2);
-        Point curPoint;
-        Line2D.Double lineToRender;
-        g2d.setColor(Color.BLACK);
-        lineToRender = new Line2D.Double(0, this.getHeight() / 2, this.getWidth(), this.getHeight() / 2);
-        g2d.draw(lineToRender);
-        g2d.setColor(Color.BLUE);
-        for (int i = this.startIdx; i < this.endIdx; ++i) {
-            int yValue = (int) (((((double) this.getHeight() / 2) / Byte.MAX_VALUE) * this.rawByteWave[i]));
-            int xValue = (int) (i * this.amplifier);
-            curPoint = new Point(xValue, yValue + this.getHeight() / 2);
-            lineToRender = new Line2D.Double(prevPoint, curPoint);
-            g2d.draw(lineToRender);
-            prevPoint = curPoint;
-        }
-    }
-
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension((int) (this.endIdx * this.amplifier), 100); //To change body of generated methods, choose Tools | Templates.
+        if (this.waveType == WaveType.SHORT) {
+            return new Dimension((int) (this.endIdx * this.amplifier), 100);
+        } else {
+            return new Dimension((int) (this.endIdx * this.amplifier * this.sampleRate / this.endIdx), 100);
+        }
     }
 
     private void paintDouble(Graphics g) {
@@ -175,8 +158,8 @@ public class WaveFormComponent extends JComponent {
         double max = this.maxAbsDouble();
         for (int i = this.startIdx; i < this.endIdx; ++i) {
             int yValue = (int) (((((double) this.getHeight() / 2) / max) * this.rawDoubleWave[i]));
-            int xValue = (int) (i * this.amplifier) * 44100 / this.endIdx;
-            curPoint = new Point(xValue, yValue + this.getHeight() / 2);
+            int xValue = (int) (i * this.amplifier * this.sampleRate / this.endIdx);
+            curPoint = new Point(xValue, -yValue + this.getHeight() / 2);
             lineToRender = new Line2D.Double(prevPoint, curPoint);
             g2d.draw(lineToRender);
             prevPoint = curPoint;
