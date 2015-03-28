@@ -41,7 +41,7 @@ public class WaveFormComponent extends JComponent {
     private byte[] rawByteWave;
     private double[] rawDoubleWave;
     private double amplifier;
-    private final double DEFAULTAMP = 0.03125;
+    public final double DEFAULTAMP = 0.03125;
 
     public WaveFormComponent() {
         this.rawWave = null;
@@ -183,22 +183,12 @@ public class WaveFormComponent extends JComponent {
         }
     }
 
-    public boolean isShrinkable() {
-        return (this.amplifier <= DEFAULTAMP);
+    public double getAmplifier() {
+        return amplifier;
     }
 
-    public void zoomIn() {
-        this.amplifier *= 2;
-        this.repaint();
-    }
-
-    public void zoomOut() {
-        if (this.isShrinkable()) {
-            this.amplifier /= 2;
-            this.repaint();
-        } else {
-            return;
-        }
+    public void setAmplifier(double amplifier) {
+        this.amplifier = amplifier;
     }
 
     private double maxAbsDouble() {

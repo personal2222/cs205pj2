@@ -34,6 +34,8 @@ public class WaveController implements ActionListener {
         theView.getOpenMeunItem().addActionListener(this);
         theView.getExitMeunItem().addActionListener(this);
         theView.getRdbtnFreqView().addActionListener(this);
+        theView.getPlusBTN().addActionListener(this);
+        theView.getMinusBTN().addActionListener(this);
         updatewave();
     }
 
@@ -43,6 +45,8 @@ public class WaveController implements ActionListener {
             theModel.FT();
             this.theView.getWaveFormComponent1().setRawDoubleWave(theModel.getFftWaveL());
             this.theView.getWaveFormComponent2().setRawDoubleWave(theModel.getFftWaveR());
+            this.theView.getWaveFormComponent1().setAmplifier(this.theModel.getAmplifier());
+            this.theView.getWaveFormComponent2().setAmplifier(this.theModel.getAmplifier());
         } else if (this.theModel.getWaveform() == WaveForm.TIME) {
             theView.getRdbtnTimeView().setSelected(true);
             if (this.theModel.getChannel() == WaveChannel.MONO) {
@@ -54,6 +58,8 @@ public class WaveController implements ActionListener {
                 theView.getWaveFormComponent1().setEndIdx(theModel.getEndIdx());
                 //theView.getWaveFormComponent2().setStartIdx(theModel.getStartIdx());
                 theView.getWaveFormComponent2().setEndIdx(theModel.getEndIdx());
+                this.theView.getWaveFormComponent1().setAmplifier(this.theModel.getAmplifier());
+                this.theView.getWaveFormComponent2().setAmplifier(this.theModel.getAmplifier());
             } else if (this.theModel.getChannel() == WaveChannel.DOUBLE) {
                 theView.getWaveFormComponent1().setRawByteWave(theModel.getRawWaveL());
                 theView.getWaveFormComponent2().setRawByteWave(theModel.getRawWaveR());
@@ -63,6 +69,8 @@ public class WaveController implements ActionListener {
                 theView.getWaveFormComponent1().setEndIdx(theModel.getEndIdx());
                 //theView.getWaveFormComponent2().setStartIdx(theModel.getStartIdx());
                 theView.getWaveFormComponent2().setEndIdx(theModel.getEndIdx());
+                this.theView.getWaveFormComponent1().setAmplifier(this.theModel.getAmplifier());
+                this.theView.getWaveFormComponent2().setAmplifier(this.theModel.getAmplifier());
             }
         }
     }
@@ -103,6 +111,12 @@ public class WaveController implements ActionListener {
             updatewave();
         } else if (e.getSource() == theView.getRdbtnTimeView()) {
             theModel.setWaveform(WaveForm.TIME);
+            updatewave();
+        } else if (e.getSource() == theView.getPlusBTN()) {
+            theModel.zoomIn();
+            updatewave();
+        } else if (e.getSource() == theView.getMinusBTN()) {
+            theModel.zoomOut();
             updatewave();
         }
     }

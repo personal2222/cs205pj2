@@ -7,6 +7,7 @@ package hw02.View;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -51,8 +52,8 @@ public class WaveView extends javax.swing.JFrame {
         javax.swing.JLabel labelRightPanel = new javax.swing.JLabel();
         scrpanRight = new javax.swing.JScrollPane();
         waveFormComponent2 = new hw02.View.WaveFormComponent();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        MinusBTN = new javax.swing.JButton();
+        PlusBTN = new javax.swing.JButton();
         genMeunBar = new javax.swing.JMenuBar();
         fileMeun = new javax.swing.JMenu();
         newMeunItem = new javax.swing.JMenuItem();
@@ -105,7 +106,6 @@ public class WaveView extends javax.swing.JFrame {
         );
 
         scrpanLeft.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrpanLeft.setViewportView(waveFormComponent1);
 
         waveFormComponent1.setPreferredSize(waveFormComponent1.getPreferredSize());
         scrpanLeft.setViewportView(waveFormComponent1);
@@ -181,17 +181,17 @@ public class WaveView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setText("－");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        MinusBTN.setText("－");
+        MinusBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                MinusBTNActionPerformed(evt);
             }
         });
 
-        jButton2.setText("＋");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        PlusBTN.setText("＋");
+        PlusBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                PlusBTNActionPerformed(evt);
             }
         });
 
@@ -229,12 +229,12 @@ public class WaveView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(MinusBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PlusBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
                 .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
@@ -250,9 +250,9 @@ public class WaveView extends javax.swing.JFrame {
                         .addGap(79, 79, 79)
                         .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(PlusBTN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(MinusBTN)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -271,13 +271,13 @@ public class WaveView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdbtnFreqViewActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void MinusBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinusBTNActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_MinusBTNActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void PlusBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlusBTNActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_PlusBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,12 +353,20 @@ public class WaveView extends javax.swing.JFrame {
         return waveFormComponent2;
     }
 
+    public JButton getMinusBTN() {
+        return MinusBTN;
+    }
+
+    public JButton getPlusBTN() {
+        return PlusBTN;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton MinusBTN;
+    private javax.swing.JButton PlusBTN;
     private javax.swing.JMenuItem exitMeunItem;
     private javax.swing.JMenu fileMeun;
     private javax.swing.JMenuBar genMeunBar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JMenuItem newMeunItem;
     private javax.swing.JMenuItem openMeunItem;
     private javax.swing.JRadioButton rdbtnFreqView;

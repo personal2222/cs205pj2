@@ -35,6 +35,8 @@ public class WaveModel {
     private int endIdx;
     private WaveForm waveform;
     private WaveChannel channel;
+    private double amplifier;
+    public final double DEFAULTAMP = 0.03125;
 
     public WaveModel() throws UnsupportedAudioFileException {
         this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(0, 0, 3, hw02.Model.SoundBasic.genTone.ToneType.SINE);
@@ -46,6 +48,7 @@ public class WaveModel {
         this.endIdx = this.rawWave.length;
         this.waveform = WaveForm.TIME;
         this.channel = WaveChannel.MONO;
+        this.amplifier = DEFAULTAMP;
     }
 
     public void generateWaveModel(short[] raw) throws UnsupportedAudioFileException {
@@ -167,6 +170,30 @@ public class WaveModel {
 
     public void setRawWaveR(byte[] rawWaveR) {
         this.rawWaveR = rawWaveR;
+    }
+
+    public boolean isShrinkable() {
+        return (this.amplifier <= DEFAULTAMP);
+    }
+
+    public double getAmplifier() {
+        return amplifier;
+    }
+
+    public void setAmplifier(double amplifier) {
+        this.amplifier = amplifier;
+    }
+
+    public void zoomIn() {
+        this.amplifier *= 2;
+    }
+
+    public void zoomOut() {
+        if (this.isShrinkable()) {
+            this.amplifier = this.amplifier / 2;
+        } else {
+            return;
+        }
     }
 
 }

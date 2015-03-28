@@ -84,15 +84,15 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton1" min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="jButton2" min="-2" pref="49" max="-2" attributes="0"/>
+                          <Component id="MinusBTN" min="-2" pref="49" max="-2" attributes="0"/>
+                          <Component id="PlusBTN" min="-2" pref="49" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="rightPanel" max="32767" attributes="0"/>
-                  <Component id="leftPanel" max="32767" attributes="0"/>
+                  <Component id="leftPanel" pref="539" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
           </Group>
@@ -112,9 +112,9 @@
                       <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                       <Component id="buttonPanel" min="-2" pref="77" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="PlusBTN" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="MinusBTN" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="34" max="32767" attributes="0"/>
@@ -250,9 +250,6 @@
         <Container class="javax.swing.JScrollPane" name="scrpanLeft">
           <Properties>
             <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
-            <Property name="viewportView" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="waveFormComponent1"/>
-            </Property>
           </Properties>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
@@ -376,20 +373,20 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="MinusBTN">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xff0d;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MinusBTNActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="PlusBTN">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xff0b;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PlusBTNActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
