@@ -56,25 +56,31 @@ public class WaveController implements ActionListener {
                 theView.getWaveFormComponent2().setRawWave(theModel.getRawWave());
                 theView.getWaveFormComponent1().setWaveType(hw02.View.WaveFormComponent.WaveType.SHORT);
                 theView.getWaveFormComponent2().setWaveType(hw02.View.WaveFormComponent.WaveType.SHORT);
-                //theView.getWaveFormComponent1().setStartIdx(theModel.getStartIdx());
+                theView.getWaveFormComponent1().setStartIdx(theModel.getStartIdx());
                 theView.getWaveFormComponent1().setEndIdx(theModel.getEndIdx());
-                //theView.getWaveFormComponent2().setStartIdx(theModel.getStartIdx());
+                theView.getWaveFormComponent2().setStartIdx(theModel.getStartIdx());
                 theView.getWaveFormComponent2().setEndIdx(theModel.getEndIdx());
                 this.theView.getWaveFormComponent1().setAmplifier(this.theModel.getAmplifier());
                 this.theView.getWaveFormComponent2().setAmplifier(this.theModel.getAmplifier());
             } else if (this.theModel.getChannel() == WaveChannel.DOUBLE) {
-                theView.getWaveFormComponent1().setRawByteWave(theModel.getRawWaveL());
-                theView.getWaveFormComponent2().setRawByteWave(theModel.getRawWaveR());
-                theView.getWaveFormComponent1().setWaveType(hw02.View.WaveFormComponent.WaveType.BYTE);
-                theView.getWaveFormComponent2().setWaveType(hw02.View.WaveFormComponent.WaveType.BYTE);
-                //theView.getWaveFormComponent1().setStartIdx(theModel.getStartIdx());
+                theView.getWaveFormComponent1().setRawWave(theModel.getRawWaveL());
+                theView.getWaveFormComponent2().setRawWave(theModel.getRawWaveR());
+                theView.getWaveFormComponent1().setWaveType(hw02.View.WaveFormComponent.WaveType.SHORT);
+                theView.getWaveFormComponent2().setWaveType(hw02.View.WaveFormComponent.WaveType.SHORT);
+                theView.getWaveFormComponent1().setStartIdx(theModel.getStartIdx());
                 theView.getWaveFormComponent1().setEndIdx(theModel.getEndIdx());
-                //theView.getWaveFormComponent2().setStartIdx(theModel.getStartIdx());
+                theView.getWaveFormComponent2().setStartIdx(theModel.getStartIdx());
                 theView.getWaveFormComponent2().setEndIdx(theModel.getEndIdx());
                 this.theView.getWaveFormComponent1().setAmplifier(this.theModel.getAmplifier());
                 this.theView.getWaveFormComponent2().setAmplifier(this.theModel.getAmplifier());
             }
         }
+        if (!this.theModel.isShrinkable()) {
+            this.theView.getMinusBTN().setEnabled(false);
+        } else {
+            this.theView.getMinusBTN().setEnabled(true);
+        }
+
     }
 
     @Override

@@ -29,8 +29,8 @@ public class WaveModel {
     private short[] rawWave;
     private double[] fftWaveL;
     private double[] fftWaveR;
-    private byte[] rawWaveL;
-    private byte[] rawWaveR;
+    private short[] rawWaveL;
+    private short[] rawWaveR;
     private int startIdx;
     private int endIdx;
     private WaveForm waveform;
@@ -74,14 +74,18 @@ public class WaveModel {
             this.startIdx = 0;
             this.endIdx = this.rawWave.length;
         } else {
-            this.rawWaveL = new byte[this.rawWave.length];
-            this.rawWaveR = new byte[this.rawWave.length];
+            this.rawWaveL = new short[this.rawWave.length / 2];
+            this.rawWaveR = new short[this.rawWave.length / 2];
             this.channel = WaveChannel.DOUBLE;
-            int idx = 0;
-            for (short i : this.rawWave) {
-                this.rawWaveL[idx] = (byte) (i >> 8);
-                this.rawWaveR[idx] = (byte) (i & 0xff);
-                idx++;
+//            int idx = 0;
+//            for (short i : this.rawWave) {
+//                this.rawWaveL[idx] = (byte) (i >> 8);
+//                this.rawWaveR[idx] = (byte) (i & 0xff);
+//                idx++;
+//            }
+            for (int i = 0; i < this.rawWave.length / 2; ++i) {
+                this.rawWaveL[i] = this.rawWave[2 * i];
+                this.rawWaveR[i] = this.rawWave[2 * i + 1];
             }
             this.startIdx = 0;
             this.endIdx = this.rawWaveL.length;
@@ -156,24 +160,24 @@ public class WaveModel {
         this.fftWaveR = fftWaveR;
     }
 
-    public byte[] getRawWaveL() {
+    public short[] getRawWaveL() {
         return rawWaveL;
     }
 
-    public void setRawWaveL(byte[] rawWaveL) {
+    public void setRawWaveL(short[] rawWaveL) {
         this.rawWaveL = rawWaveL;
     }
 
-    public byte[] getRawWaveR() {
+    public short[] getRawWaveR() {
         return rawWaveR;
     }
 
-    public void setRawWaveR(byte[] rawWaveR) {
+    public void setRawWaveR(short[] rawWaveR) {
         this.rawWaveR = rawWaveR;
     }
 
     public boolean isShrinkable() {
-        return (this.amplifier <= DEFAULTAMP);
+        return (this.amplifier > DEFAULTAMP);
     }
 
     public double getAmplifier() {
