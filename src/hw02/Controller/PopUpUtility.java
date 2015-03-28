@@ -19,6 +19,9 @@ public class PopUpUtility {
 
     public static short[] genWave() {
         ToneType toneType = PopUpUtility.getToneType();
+        if (toneType == null) {
+            return null;
+        }
         int freq = PopUpUtility.getFreq();
         if (freq == -1) {
             return null;
