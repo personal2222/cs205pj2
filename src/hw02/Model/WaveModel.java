@@ -38,9 +38,14 @@ public class WaveModel {
     private WaveChannel channel;
     private double amplifier;
     private double sampleRate;
-    public final double DEFAULTAMP = 0.03125;
+    public final double DEFAULTAMP = 0.0625;
 
-    public WaveModel() throws UnsupportedAudioFileException {
+    /**
+     * The constructor of the wave model. It initialize all necessary attributes
+     * and provides a basic wave to avoid null exceptions for drawing.
+     *
+     */
+    public WaveModel() {
         this.rawWave = hw02.Model.SoundBasic.genTone.generatePureTone(0, 0, 3, hw02.Model.SoundBasic.genTone.ToneType.SINE);
         this.fftWaveL = null;
         this.fftWaveR = null;
@@ -53,7 +58,12 @@ public class WaveModel {
         this.amplifier = DEFAULTAMP;
     }
 
-    public void generateWaveModel(short[] raw) throws UnsupportedAudioFileException {
+    /**
+     * Callen when the user want a generated wave; if null is given, do nothing.
+     *
+     * @param raw the raw wave that is generated with the uesr's specifications.
+     */
+    public void generateWaveModel(short[] raw) {
         if (raw != null) {
             this.rawWave = raw;
             this.waveform = WaveForm.TIME;
@@ -64,7 +74,14 @@ public class WaveModel {
         }
     }
 
-    //TODO TEST
+    /**
+     * Called when user want to open a file.
+     *
+     * @param fileinput the file that the user intend to open; if null, do
+     * nothing.
+     * @throws IOException
+     * @throws UnsupportedAudioFileException
+     */
     public void readFileWaveModel(File fileinput) throws IOException, UnsupportedAudioFileException {
         if (fileinput == null) {
             return;
@@ -78,18 +95,60 @@ public class WaveModel {
             this.startIdx = 0;
             this.endIdx = this.rawWave.length;
         } else {
-            this.rawWaveL = new short[this.rawWave.length / 2];
-            this.rawWaveR = new short[this.rawWave.length / 2];
             this.channel = WaveChannel.DOUBLE;
-            for (int i = 0; i < this.rawWave.length / 2; ++i) {
-                this.rawWaveL[i] = this.rawWave[2 * i];
-                this.rawWaveR[i] = this.rawWave[2 * i + 1];
-            }
+            separateLeftAndRightChannel();
             this.startIdx = 0;
             this.endIdx = this.rawWaveL.length;
         }
     }
 
+    /**
+     * called when the opened file is a dual channel file, and separate the left
+     * and the right channel.
+     */
+    private void separateLeftAndRightChannel() {
+        this.rawWaveL = new short[this.rawWave.length / 2];
+        this.rawWaveR = new short[this.rawWave.length / 2];
+        for (int i = 0; i < this.rawWave.length / 2; ++i) {
+            this.rawWaveL[i] = this.rawWave[2 * i];
+            this.rawWaveR[i] = this.rawWave[2 * i + 1];
+        }
+    }
+
+    /**
+     * Called when the user want to view the sound wave in the frequency domain.
+     */
+    public void FT() {
+        if (this.channel == WaveChannel.DOUBLE) {
+            this.waveform = WaveForm.FREC;
+            this.fftWaveL = hw02.Model.MathBasic.DFT.getMagnitudeResult(rawWaveL);
+            this.fftWaveR = hw02.Model.MathBasic.DFT.getMagnitudeResult(rawWaveR);
+        } else if (this.channel == WaveChannel.MONO) {
+            this.waveform = WaveForm.FREC;
+            this.fftWaveL = hw02.Model.MathBasic.DFT.getMagnitudeResult(rawWave);
+            this.fftWaveR = this.fftWaveL;
+        }
+    }
+
+    /**
+     * Called when the user want to zoom in the wave
+     */
+    public void zoomIn() {
+        this.amplifier *= 2;
+    }
+
+    /**
+     * Called when the user want to zoom out the wave
+     */
+    public void zoomOut() {
+        if (this.isShrinkable()) {
+            this.amplifier = this.amplifier / 2;
+        } else {
+            return;
+        }
+    }
+
+    //Getters and Setters.
     public WaveChannel getChannel() {
         return channel;
     }
@@ -120,18 +179,6 @@ public class WaveModel {
 
     public void setSampleRate(double sampleRate) {
         this.sampleRate = sampleRate;
-    }
-
-    public void FT() {
-        if (this.channel == WaveChannel.DOUBLE) {
-            this.waveform = WaveForm.FREC;
-            this.fftWaveL = hw02.Model.MathBasic.DFT.getMagnitudeResult(rawWaveL);
-            this.fftWaveR = hw02.Model.MathBasic.DFT.getMagnitudeResult(rawWaveR);
-        } else if (this.channel == WaveChannel.MONO) {
-            this.waveform = WaveForm.FREC;
-            this.fftWaveL = hw02.Model.MathBasic.DFT.getMagnitudeResult(rawWave);
-            this.fftWaveR = this.fftWaveL;
-        }
     }
 
     public void setWaveform(WaveForm waveform) {
@@ -192,18 +239,6 @@ public class WaveModel {
 
     public void setAmplifier(double amplifier) {
         this.amplifier = amplifier;
-    }
-
-    public void zoomIn() {
-        this.amplifier *= 2;
-    }
-
-    public void zoomOut() {
-        if (this.isShrinkable()) {
-            this.amplifier = this.amplifier / 2;
-        } else {
-            return;
-        }
     }
 
 }

@@ -17,6 +17,12 @@ import javax.swing.JOptionPane;
  */
 public class PopUpUtility {
 
+    /**
+     * Ask the user's choices and generate a pure tone.
+     *
+     * @return a short array representing the generated tone; null if user
+     * choose to cancel the generation.
+     */
     public static short[] genWave() {
         ToneType toneType = PopUpUtility.getToneType();
         if (toneType == null) {
@@ -37,12 +43,17 @@ public class PopUpUtility {
         return genTone.generatePureTone(freq, amplitude, duration, toneType);
     }
 
-    public static ToneType getToneType() {
+    /**
+     * Ask the user for the toneType of the generated tone.
+     *
+     * @return the tonetype that the user want; null for user cancel the input.
+     */
+    private static ToneType getToneType() {
         boolean EXIT = false;
         while (true) {
             genTone.ToneType toneType = PopUps.toneTypePopUp();
             if (toneType == null) {
-                EXIT = PopUps.exitComfirm();
+                EXIT = PopUps.cancelComfirm();
                 if (EXIT) {
                     return null;
                 } else {
@@ -53,13 +64,18 @@ public class PopUpUtility {
         }
     }
 
-    public static int getFreq() {
+    /**
+     * Ask the user for the frequency of the generated tone.
+     *
+     * @return the frequency that the user want; -1 for user cancel the input.
+     */
+    private static int getFreq() {
         int freq = 0;
         boolean EXIT = false;
         while (true) {
             String freqStr = PopUps.frequencyPopUp();
             if (freqStr == null) {
-                EXIT = PopUps.exitComfirm();
+                EXIT = PopUps.cancelComfirm();
                 if (EXIT) {
                     return -1;
                 } else {
@@ -76,13 +92,18 @@ public class PopUpUtility {
         }
     }
 
-    public static double getAmplitude() {
+    /**
+     * Ask the user for the amplitude of the generated tone.
+     *
+     * @return the amplitude that the user want; -1 for user cancel the input.
+     */
+    private static double getAmplitude() {
         boolean EXIT = false;
         double amplitude = 0.0;
         while (true) {
             String amplitudeStr = PopUps.amplitudePopUp();
             if (amplitudeStr == null) {
-                EXIT = PopUps.exitComfirm();
+                EXIT = PopUps.cancelComfirm();
                 if (EXIT) {
                     return -1;
                 } else {
@@ -104,13 +125,18 @@ public class PopUpUtility {
         }
     }
 
-    public static double getDuration() {
+    /**
+     * Ask the user for the duration of the generated tone.
+     *
+     * @return the duration that the user want; -1 for user cancel the input.
+     */
+    private static double getDuration() {
         boolean EXIT = false;
         double duration = 0.0;
         while (true) {
             String durationStr = PopUps.durationPopUp();
             if (durationStr == null) {
-                EXIT = PopUps.exitComfirm();
+                EXIT = PopUps.cancelComfirm();
                 if (EXIT) {
                     return -1;
                 } else {
@@ -132,7 +158,25 @@ public class PopUpUtility {
         }
     }
 
+    /**
+     * Ask the user to choose a audio file.
+     *
+     * @return the file that the user chose; null for user cancel the input.
+     */
     public static File getFile() {
-        return PopUps.chooseFile();
+        boolean EXIT;
+        while (true) {
+            File toReturn = PopUps.chooseFile();
+            if (toReturn == null) {
+                EXIT = PopUps.cancelComfirm();
+                if (EXIT) {
+                    return null;
+                } else {
+                    continue;
+                }
+            } else {
+                return toReturn;
+            }
+        }
     }
 }
