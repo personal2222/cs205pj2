@@ -41,35 +41,6 @@ public class DFT {
         return result;
     }
 
-    public static Complex[] byteDFT(byte[] rawSound) throws LengthNotAPowerOfTwoException {
-        Complex[] waveRepr = new Complex[rawSound.length];
-        for (int i = 0; i < waveRepr.length; ++i) {
-            waveRepr[i] = new Complex(rawSound[i], 0);
-        }
-        waveRepr = DFT.extendArrayToPowOfTwo(waveRepr);
-        Complex[] result = DFT.FTransform(waveRepr);
-        return result;
-    }
-
-    /**
-     * This is the original DFT; it directly implements the definition of DFT
-     *
-     * @param series An array of complex numbers to perform the DFT
-     * @return the result as an array of complex numbers
-     */
-    public static Complex[] Transform(Complex[] series) {
-        int inputLength = series.length;
-        Complex[] k_array = new Complex[inputLength];
-        for (int k = 0; k < inputLength; ++k) {
-            Complex sum = new Complex(0, 0);
-            for (int t = 0; t < inputLength; ++t) {
-                sum = sum.add(DFT.exponent(t, k, inputLength).exp().mul(series[t]));
-            }
-            k_array[k] = sum;
-        }
-        return k_array;
-    }
-
     /**
      * This program implements the Fast Fourier Transform for performing DFT
      *
@@ -168,24 +139,17 @@ public class DFT {
         return new Complex(0, imag);
     }
 
+    /**
+     * return a double array representing the result of the DFT using the FFT
+     * method.
+     *
+     * @param rawWave
+     * @return
+     */
     public static double[] getMagnitudeResult(short[] rawWave) {
         Complex[] result = null;
         try {
             result = DFT.shortDFT(rawWave);
-        } catch (LengthNotAPowerOfTwoException lnpte) {
-            lnpte.printStackTrace();
-        }
-        double[] magArray = new double[result.length];
-        for (int i = 0; i < result.length; ++i) {
-            magArray[i] = result[i].magnitude();
-        }
-        return magArray;
-    }
-
-    public static double[] getMagnitudeResult(byte[] rawWave) {
-        Complex[] result = null;
-        try {
-            result = DFT.byteDFT(rawWave);
         } catch (LengthNotAPowerOfTwoException lnpte) {
             lnpte.printStackTrace();
         }
