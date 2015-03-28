@@ -154,7 +154,7 @@ public class WaveView extends javax.swing.JFrame {
         scrpanRight.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrpanRight.setPreferredSize(new java.awt.Dimension(4, 19));
 
-        waveFormComponent2.setPreferredSize(new java.awt.Dimension(waveFormComponent2.getEndIdx(), 100));
+        waveFormComponent2.setPreferredSize(waveFormComponent2.getPreferredSize());
         scrpanRight.setViewportView(waveFormComponent2);
 
         javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);

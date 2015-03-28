@@ -113,7 +113,7 @@ public class WaveFormComponent extends JComponent {
     protected void paintComponent(Graphics g) {
         if (this.waveType == WaveType.SHORT) {
             this.paintShort(g);
-        } else if (this.waveType == WaveType.SHORT) {
+        } else if (this.waveType == WaveType.BYTE) {
             this.paintByte(g);
         } else if (this.waveType == WaveType.DOUBLE) {
             this.paintDouble(g);
@@ -160,7 +160,7 @@ public class WaveFormComponent extends JComponent {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(this.endIdx, 100); //To change body of generated methods, choose Tools | Templates.
+        return new Dimension((int) (this.endIdx * this.amplifier), 100); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void paintDouble(Graphics g) {

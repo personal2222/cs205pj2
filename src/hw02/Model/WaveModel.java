@@ -78,9 +78,9 @@ public class WaveModel {
             this.rawWaveR = new byte[this.rawWave.length];
             this.channel = WaveChannel.DOUBLE;
             int idx = 0;
-            for (short i : this.rawWaveL) {
-                this.rawWaveL[idx] = (byte) (i >> 8);
-                this.rawWaveR[idx] = (byte) (i & 0xff);
+            for (short i : this.rawWave) {
+                this.rawWaveL[idx] = (byte) (i / Math.pow(2, 8));
+                this.rawWaveR[idx] = (byte) (i);
                 idx++;
             }
             this.startIdx = 0;
