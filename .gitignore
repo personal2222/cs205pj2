@@ -47,3 +47,5 @@ manifest.mf
 nbproject/genfiles.properties
 *.properties
 /build/
+dist/README.TXT
+*.jar
