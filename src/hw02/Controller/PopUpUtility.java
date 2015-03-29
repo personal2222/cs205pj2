@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Ruby
+ * @author Zhengri Fan, Jiayu Huang
  */
 public class PopUpUtility {
 

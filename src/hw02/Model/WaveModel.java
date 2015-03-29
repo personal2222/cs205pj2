@@ -13,7 +13,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
- * @author huangjiayu
+ * @author Zhengri Fan, Jiayu Huang
  */
 public class WaveModel {
 
@@ -146,6 +146,13 @@ public class WaveModel {
         } else {
             return;
         }
+    }
+
+    /**
+     * Reset the amplifier when needed.
+     */
+    public void resetAmplifier() {
+        this.amplifier = this.DEFAULTAMP;
     }
 
     //Getters and Setters.

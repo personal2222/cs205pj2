@@ -2,7 +2,7 @@
  * CSCI205 - Software Engineering and Design
  * Spring 2015
  *
- * Name: Zhengri Fan
+ * Name: Zhengri Fan, Jiayu Huang
  * Date: 2015-3-22
  * Time: 17:16:09
  *
@@ -25,7 +25,7 @@ import javax.swing.JComponent;
 
 /**
  *
- * @author Zhengri Fan
+ * @author Zhengri Fan, Jiayu Huang
  */
 public class WaveFormComponent extends JComponent {
 
@@ -147,10 +147,18 @@ public class WaveFormComponent extends JComponent {
      */
     @Override
     public Dimension getPreferredSize() {
-        if (this.waveType == WaveType.SHORT) {
-            return new Dimension((int) (this.endIdx * this.amplifier), 100);
+        if (this.getParent() != null) {
+            if (this.waveType == WaveType.SHORT) {
+                return new Dimension((int) (this.endIdx * this.amplifier), this.getParent().getHeight());
+            } else {
+                return new Dimension((int) (this.endIdx * this.amplifier * this.sampleRate / this.endIdx), this.getParent().getHeight());
+            }
         } else {
-            return new Dimension((int) (this.endIdx * this.amplifier * this.sampleRate / this.endIdx), 100);
+            if (this.waveType == WaveType.SHORT) {
+                return new Dimension((int) (this.endIdx * this.amplifier), this.getHeight());
+            } else {
+                return new Dimension((int) (this.endIdx * this.amplifier * this.sampleRate / this.endIdx), this.getHeight());
+            }
         }
     }
 

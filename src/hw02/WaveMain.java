@@ -15,7 +15,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
- * @author Ruby
+ * @author Zhengri Fan, Jiayu Huang
  */
 public class WaveMain {
 

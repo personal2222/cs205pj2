@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author huangjiayu
+ * @author Zhengri Fan, Jiayu Huang
  */
 public class WaveController implements ActionListener {
 
@@ -38,7 +38,7 @@ public class WaveController implements ActionListener {
         this.theModel = theModel;
         this.theView = theView;
         addActionListener();
-        updatewave();
+        updateView();
     }
 
     /**
@@ -52,12 +52,14 @@ public class WaveController implements ActionListener {
         theView.getRdbtnTimeView().addActionListener(this);
         theView.getPlusBTN().addActionListener(this);
         theView.getMinusBTN().addActionListener(this);
+        theView.getResetSizeMenuBotton().addActionListener(this);
+        theView.getResetWaveMeunBotton().addActionListener(this);
     }
 
     /**
      * update the view, mainly the waveView, from the model.
      */
-    public void updatewave() {
+    private void updateView() {
         if (this.theModel.getWaveform() == WaveForm.FREC) {
             theView.getRdbtnFreqView().setSelected(true);
             FFTUpdate();
@@ -93,7 +95,7 @@ public class WaveController implements ActionListener {
         theView.getWaveFormComponent2().setEndIdx(theModel.getEndIdx());
         this.theView.getWaveFormComponent1().setAmplifier(this.theModel.getAmplifier());
         this.theView.getWaveFormComponent2().setAmplifier(this.theModel.getAmplifier());
-        this.theView.getChannelLab().setText("2-Channel Sound");
+        this.theView.getChannelLab().setText("Stereo Sound");
     }
 
     /**
@@ -137,10 +139,13 @@ public class WaveController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == theView.getNewMeunItem()) {
             this.theModel.generateWaveModel(PopUpUtility.genWave());
-            updatewave();
+            this.theModel.resetAmplifier();
+            updateView();
         } else if (e.getSource() == theView.getOpenMeunItem()) {
             openFile();
-            updatewave();
+            this.theModel.resetAmplifier();
+            updateView();
+
         } else if (e.getSource() == theView.getExitMeunItem()) {
             boolean isExit = PopUps.exitComfirm();
             if (isExit) {
@@ -150,16 +155,22 @@ public class WaveController implements ActionListener {
 
         } else if (e.getSource() == theView.getRdbtnFreqView()) {
             theModel.FT();
-            updatewave();
+            updateView();
         } else if (e.getSource() == theView.getRdbtnTimeView()) {
             theModel.setWaveform(WaveForm.TIME);
-            updatewave();
+            updateView();
         } else if (e.getSource() == theView.getPlusBTN()) {
             theModel.zoomIn();
-            updatewave();
+            updateView();
         } else if (e.getSource() == theView.getMinusBTN()) {
             theModel.zoomOut();
-            updatewave();
+            updateView();
+        } else if (e.getSource() == theView.getResetSizeMenuBotton()) {
+            theModel.resetAmplifier();
+            updateView();
+        } else if (e.getSource() == theView.getResetWaveMeunBotton()) {
+            theModel = new WaveModel();
+            updateView();
         }
     }
 
@@ -177,10 +188,10 @@ public class WaveController implements ActionListener {
                 JOptionPane.showMessageDialog(null, "File Error", "Bad File", JOptionPane.ERROR_MESSAGE);
                 continue;
             } catch (UnsupportedAudioFileException ex) {
-                JOptionPane.showMessageDialog(null, "UnSupported Audio", "Bad File", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Unsupported Audio", "Bad File", JOptionPane.ERROR_MESSAGE);
                 continue;
             }
         }
-    }
 
+    }
 }
