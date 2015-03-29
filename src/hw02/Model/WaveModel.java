@@ -17,11 +17,18 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class WaveModel {
 
+    /**
+     * Determine whether the user want to see the frequency domain or the time
+     * domain.
+     */
     public static enum WaveForm {
 
         TIME, FREC;
     }
 
+    /**
+     * Determine whether the wave is single or dual channel.
+     */
     public static enum WaveChannel {
 
         MONO, DOUBLE;
@@ -38,6 +45,7 @@ public class WaveModel {
     private WaveChannel channel;
     private double amplifier;
     private double sampleRate;
+    //The default amplifier value.
     public final double DEFAULTAMP = 0.0625;
 
     /**

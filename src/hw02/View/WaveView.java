@@ -371,6 +371,10 @@ public class WaveView extends javax.swing.JFrame {
         return resetWaveMeunBotton;
     }
 
+    public JLabel getChannelLab() {
+        return ChannelLab;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ChannelLab;
     private javax.swing.JButton MinusBTN;
@@ -390,7 +394,4 @@ public class WaveView extends javax.swing.JFrame {
     private hw02.View.WaveFormComponent waveFormComponent2;
     // End of variables declaration//GEN-END:variables
 
-    public JLabel getChannelLab() {
-        return ChannelLab;
-    }
 }

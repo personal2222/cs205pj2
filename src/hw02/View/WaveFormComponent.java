@@ -43,8 +43,9 @@ public class WaveFormComponent extends JComponent {
     private WaveType waveType;
     private double[] rawDoubleWave;
     private double amplifier;
-    public final double DEFAULTAMP = 0.0625;
     private double sampleRate;
+    //The default amplifier value.
+    public final double DEFAULTAMP = 0.0625;
 
     /**
      * The constructor of the wave form component. Initialize the proper
