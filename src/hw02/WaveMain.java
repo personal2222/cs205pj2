@@ -1,7 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* *****************************************
+ * CSCI205 - Software Engineering and Design
+ * Spring 2015
+ *
+ * Name: Zhengri Fan, Jiayu Huang
+ * Date: 2015-3-29
+ * Time: 17:53:00
+ *
+ * Project: csci205
+ * Package: hw02
+ * File: WaveMain
+ * Description: Project2 Main File
+ *
+ * ****************************************
  */
 package hw02;
 
@@ -14,6 +24,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
+ * Main Program to Run the Wave Generator
  *
  * @author Zhengri Fan, Jiayu Huang
  */

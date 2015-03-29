@@ -3,13 +3,13 @@
  * Spring 2015
  *
  * Name: Zhengri Fan, Jiayu Huang
- * Date: 2015-3-3
+ * Date: 2015-3-28
  * Time: 22:36:49
  *
  * Project: csci205
- * Package: hw01
+ * Package: hw02.Model.SoundBasic
  * File: genTone
- * Description: Project1
+ * Description: Project2 ToneGenerate Model
  *
  * ****************************************
  */
@@ -20,6 +20,7 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
+ * Tone generation Model
  *
  * @author Jiayu Huang, Zhengri Fan
  */

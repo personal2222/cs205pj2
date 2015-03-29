@@ -9,7 +9,7 @@
  * Project: csci205
  * Package: hw02.View
  * File: WaveFormComponent
- * Description:
+ * Description: The View of Wave Form
  *
  * ****************************************
  */
@@ -24,6 +24,7 @@ import java.awt.geom.Line2D;
 import javax.swing.JComponent;
 
 /**
+ * WaveFormComponent View
  *
  * @author Zhengri Fan, Jiayu Huang
  */

@@ -3,19 +3,20 @@
  * Spring 2015
  *
  * Name: Zhengri Fan, Jiayu Huang
- * Date: 2015-2-28
+ * Date: 2015-3-28
  * Time: 21:12:33
  *
  * Project: csci205
- * Package: hw01.Math
+ * Package: hw02.Model.MathBasic
  * File: Complex
- * Description: Project1
+ * Description: Project2 Math Model
  *
  * ****************************************
  */
 package hw02.Model.MathBasic;
 
 /**
+ * Complex class
  *
  * @author Jiayu Huang, Zhengri Fan
  */

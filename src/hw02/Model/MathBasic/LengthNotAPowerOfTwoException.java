@@ -3,13 +3,13 @@
  * Spring 2015
  *
  * Name: Zhengri Fan, Jiayu Huang
- * Date: 2015-3-9
+ * Date: 2015-3-28
  * Time: 16:43:32
  *
  * Project: csci205
- * Package: hw01.Math
+ * Package: hw01.Model.MathBasic
  * File: LengthNotAPowerOfTwoException
- * Description: Project1
+ * Description: Project2 Math Model Exception
  *
  * ****************************************
  */

@@ -3,19 +3,21 @@
  * Spring 2015
  *
  * Name: Zhengri Fan, Jiayu Huang
- * Date: 2015-2-28
+ * Date: 2015-3-28
  * Time: 23:24:19
  *
  * Project: csci205
- * Package: hw01.Math
+ * Package: hw02.Model.MathBasic
  * File: DFT
- * Description: Project1
+ * Description: Project2 Math Model DFT
  *
  * ****************************************
  */
 package hw02.Model.MathBasic;
 
 /**
+ * Generate and Manage FT stuff
+ *
  * @author Jiayu Huang, Zhengri Fan
  */
 public class DFT {

@@ -3,13 +3,13 @@
  * Spring 2015
  *
  * Name: Zhengri Fan, Jiayu Huang
- * Date: 2015-3-3
+ * Date: 2015-3-28
  * Time: 19:22:13
  *
  * Project: csci205
- * Package: hw01
+ * Package: hw02.Model.SoundBasic
  * File: SoundIO
- * Description: Project1
+ * Description: Project2 Sound IO Model
  *
  * ****************************************
  */
@@ -28,6 +28,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
+ * Sound IO Model
  *
  * @author Jiayu Huang, Zhengri Fan
  */
