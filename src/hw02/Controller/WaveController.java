@@ -49,6 +49,7 @@ public class WaveController implements ActionListener {
         theView.getOpenMeunItem().addActionListener(this);
         theView.getExitMeunItem().addActionListener(this);
         theView.getRdbtnFreqView().addActionListener(this);
+        theView.getRdbtnTimeView().addActionListener(this);
         theView.getPlusBTN().addActionListener(this);
         theView.getMinusBTN().addActionListener(this);
     }
@@ -92,6 +93,7 @@ public class WaveController implements ActionListener {
         theView.getWaveFormComponent2().setEndIdx(theModel.getEndIdx());
         this.theView.getWaveFormComponent1().setAmplifier(this.theModel.getAmplifier());
         this.theView.getWaveFormComponent2().setAmplifier(this.theModel.getAmplifier());
+        this.theView.getChannelLab().setText("2-Channel Sound");
     }
 
     /**
@@ -109,6 +111,7 @@ public class WaveController implements ActionListener {
         theView.getWaveFormComponent2().setEndIdx(theModel.getEndIdx());
         theView.getWaveFormComponent1().setAmplifier(this.theModel.getAmplifier());
         theView.getWaveFormComponent2().setAmplifier(this.theModel.getAmplifier());
+        this.theView.getChannelLab().setText("Mono Sound");
     }
 
     /**
@@ -122,6 +125,7 @@ public class WaveController implements ActionListener {
         this.theView.getWaveFormComponent1().setWaveType(WaveFormComponent.WaveType.DOUBLE);
         this.theView.getWaveFormComponent1().setAmplifier(this.theModel.getAmplifier());
         this.theView.getWaveFormComponent2().setAmplifier(this.theModel.getAmplifier());
+        this.theView.getChannelLab().setText("Freq vs. Amp");
     }
 
     /**

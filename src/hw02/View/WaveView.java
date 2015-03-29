@@ -6,6 +6,7 @@
 package hw02.View;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -50,6 +51,7 @@ public class WaveView extends javax.swing.JFrame {
         waveFormComponent2 = new hw02.View.WaveFormComponent();
         MinusBTN = new javax.swing.JButton();
         PlusBTN = new javax.swing.JButton();
+        ChannelLab = new javax.swing.JLabel();
         genMeunBar = new javax.swing.JMenuBar();
         fileMeun = new javax.swing.JMenu();
         newMeunItem = new javax.swing.JMenuItem();
@@ -191,6 +193,8 @@ public class WaveView extends javax.swing.JFrame {
             }
         });
 
+        ChannelLab.setText("Channel");
+
         fileMeun.setText("File");
 
         newMeunItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
@@ -226,7 +230,10 @@ public class WaveView extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(MinusBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PlusBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(PlusBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(ChannelLab)))))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -248,7 +255,9 @@ public class WaveView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PlusBTN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MinusBTN)))
+                        .addComponent(MinusBTN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ChannelLab)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -329,6 +338,7 @@ public class WaveView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ChannelLab;
     private javax.swing.JButton MinusBTN;
     private javax.swing.JButton PlusBTN;
     private javax.swing.JMenuItem exitMeunItem;
@@ -343,4 +353,8 @@ public class WaveView extends javax.swing.JFrame {
     private hw02.View.WaveFormComponent waveFormComponent1;
     private hw02.View.WaveFormComponent waveFormComponent2;
     // End of variables declaration//GEN-END:variables
+
+    public JLabel getChannelLab() {
+        return ChannelLab;
+    }
 }

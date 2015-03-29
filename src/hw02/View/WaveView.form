@@ -82,10 +82,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="buttonPanel" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="MinusBTN" min="-2" pref="49" max="-2" attributes="0"/>
                           <Component id="PlusBTN" min="-2" pref="49" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <Component id="ChannelLab" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -115,6 +119,8 @@
                       <Component id="PlusBTN" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="MinusBTN" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ChannelLab" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="34" max="32767" attributes="0"/>
@@ -388,6 +394,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PlusBTNActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="ChannelLab">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Channel"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
